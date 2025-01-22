@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
@@ -47,11 +48,11 @@ public class User {
 	}
 
 	public List<Link> getLinks() {
-		return links;
+		return new ArrayList<Link>(links);
 	}
 	
-	public void setLinks(List<Link> links) {
-		this.links = links;
+	public void clearLinks() {
+		links.clear();
 	}
 	
 	public static boolean autenticate(User existUser, String email, String senha) {

@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import controller.command.CadastroCommand;
 import controller.command.Command;
 import controller.command.ErrorCommand;
+import controller.command.FormCadastroCommand;
 import controller.command.FormLoginCommand;
 import controller.command.LoginCommand;
 
@@ -30,6 +32,12 @@ public class FrontController extends HttpServlet {
 		
 		if("loginForm".equals(action)) { 
 			command = new FormLoginCommand();
+		} else if("getLogin".equals(action)) {
+			command = new LoginCommand();
+		} else if("cadastroForm".equals(action)) {
+			command = new FormCadastroCommand();
+		} else if("cadastro".equals(action)) {
+			command = new CadastroCommand();
 		} else if("getLogin".equals(action)) {
 			command = new LoginCommand();
 		} else {

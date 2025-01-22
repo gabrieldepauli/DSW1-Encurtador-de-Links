@@ -51,5 +51,11 @@
         </a>
     </div>
     
+    <br><br>
+	<hr>
+	<br><br>
+	
+	<p>Não possui cadastro? <a href="front.do?action=cadastroForm">Cadastre-se</a></p>
+    
 </body>
 </html>

@@ -18,6 +18,12 @@
             <a href="front.do?action=loginForm" style="text-decoration: none;">
                 <button style="padding: 10px 20px; font-size: 15px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto;">Log In</button>
             </a>
+            <br>
+            <hr>
+            <br>
+            <a href="front.do?action=cadastroForm" style="text-decoration: none;">
+                <button style="padding: 10px 20px; font-size: 15px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto;">Cadastrar</button>
+            </a>
         </div>
     </div>
 </body>

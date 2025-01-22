@@ -18,8 +18,9 @@ public class UserDaoImp implements UserDao {
 			try(var connection = DatabaseConnection.getConnection();
 					var statement = connection.prepareStatement(INSERT)) {
 				
-				statement.setString(1, user.getEmail());
-				statement.setString(2, user.getSenhaHash());
+				statement.setString(1, user.getNome());
+				statement.setString(2, user.getEmail());
+				statement.setString(3, user.getSenhaHash());
 				
 				rows = statement.executeUpdate();
 			} catch (SQLException e) {
