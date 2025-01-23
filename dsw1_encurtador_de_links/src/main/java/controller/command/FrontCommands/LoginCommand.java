@@ -1,7 +1,8 @@
-package controller.command;
+package controller.command.FrontCommands;
 
 import java.io.IOException;
 
+import controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

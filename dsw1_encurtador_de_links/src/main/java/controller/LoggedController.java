@@ -9,8 +9,10 @@ import java.io.IOException;
 
 import controller.command.Command;
 import controller.command.ErrorCommand;
-import controller.command.LogoutCommand;
-import controller.command.UserPageCommand;
+import controller.command.LoggedCommands.EncurtarLinkCommand;
+import controller.command.LoggedCommands.LogoutCommand;
+import controller.command.LoggedCommands.PageEncurtadorCommand;
+import controller.command.LoggedCommands.UserPageCommand;
 
 @WebServlet("/logged.do")
 public class LoggedController extends HttpServlet {
@@ -32,6 +34,10 @@ public class LoggedController extends HttpServlet {
 			command = new UserPageCommand();
 		} else if("logout".equals(action)) { 
 			command = new LogoutCommand();		
+		} else if("pageEncurtador".equals(action)) { 
+			command = new PageEncurtadorCommand();		
+		} else if("encurtarLink".equals(action)) { 
+			command = new EncurtarLinkCommand();		
 		} else {
 			command = new ErrorCommand();
 		}

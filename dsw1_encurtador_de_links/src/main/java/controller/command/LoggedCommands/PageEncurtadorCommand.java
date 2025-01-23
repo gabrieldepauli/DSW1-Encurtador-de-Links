@@ -1,18 +1,19 @@
-package controller.command;
+package controller.command.LoggedCommands;
 
 import java.io.IOException;
 
+import controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class FormLoginCommand implements Command {
+public class PageEncurtadorCommand implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		return "login.jsp";
+		
+		return "/loggedin/encurtarLink.jsp";
 	}
 
 }

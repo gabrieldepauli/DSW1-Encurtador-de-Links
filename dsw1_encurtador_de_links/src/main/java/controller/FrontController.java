@@ -7,12 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import controller.command.CadastroCommand;
 import controller.command.Command;
 import controller.command.ErrorCommand;
-import controller.command.FormCadastroCommand;
-import controller.command.FormLoginCommand;
-import controller.command.LoginCommand;
+import controller.command.FrontCommands.CadastroCommand;
+import controller.command.FrontCommands.FormCadastroCommand;
+import controller.command.FrontCommands.FormLoginCommand;
+import controller.command.FrontCommands.LoginCommand;
 
 @WebServlet("/front.do")
 public class FrontController extends HttpServlet {

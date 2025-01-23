@@ -9,7 +9,7 @@ public class User {
 	private String nome;
 	private String email;
 	private String senhaHash;
-	private List<Link> links;
+	private List<Link> links = new LinkedList<Link>();
 	
 	public User(String nome, String email, String senha) {
 		init(nome, email, hashPassword(senha));
@@ -61,6 +61,10 @@ public class User {
 		}
 		
 		return false;
+	}
+	
+	public void addLink(Link link) {
+		links.add(new Link(link.getId(), link.getUrl_original(), link.getUrl_encurtada()));
 	}
 	
 	private void init(String nome, String email, String senhaHash) {

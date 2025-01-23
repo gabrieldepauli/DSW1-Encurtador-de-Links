@@ -1,24 +1,19 @@
-package controller.command;
+package controller.command.FrontCommands;
 
 import java.io.IOException;
 
+import controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class LogoutCommand implements Command {
+public class FormCadastroCommand implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		var session = request.getSession(false);
-		
-		if(session != null) {
-			session.invalidate();
-		}
-		
-		return "index.jsp";
+		return "cadastro.jsp";
 	}
 
 }

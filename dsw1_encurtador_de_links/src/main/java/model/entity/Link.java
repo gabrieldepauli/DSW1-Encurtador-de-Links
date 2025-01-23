@@ -1,31 +1,41 @@
 package model.entity;
 
 public class Link {
-	private String id; // Utilizando AUTO-INCREMENT no banco de dados
-	private String url;
 	
-	public Link() {
-	}
+	private int id; // Utilizando AUTO-INCREMENT no banco de dados
+	private String url_original;
+	private String url_encurtada;
 	
-	public Link(String id, String url) {
+	public Link() {}
+
+	public Link(int id, String url_original, String url_encurtada) {
 		super();
-		this.url = url;
+		this.id = id;
+		this.url_original = url_original;
+		this.url_encurtada = url_encurtada;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getUrl_original() {
+		return url_original;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}	
-	
+	public void setUrl_original(String url_original) {
+		this.url_original = url_original;
+	}
+
+	public String getUrl_encurtada() {
+		return url_encurtada;
+	}
+
+	public void setUrl_encurtada(String url_encurtada) {
+		this.url_encurtada = url_encurtada;
+	}
 }
