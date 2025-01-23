@@ -11,6 +11,8 @@ public interface LinkDao {
 	
 	Link getByID(User user, int id);
 	
+	Link getByURLencurtada(String urlEncurtada);
+	
 	List<Link> getAllLinks(User user);
 	
 	boolean delete(User user, Link link);

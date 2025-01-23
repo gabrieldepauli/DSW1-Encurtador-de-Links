@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Encurtar link</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -31,17 +33,18 @@
 
  	<%
 	    String message = (String) request.getAttribute("message");
- 		boolean sucess = (boolean) request.getAttribute("sucess");
+ 		Boolean sucess = (Boolean) request.getAttribute("sucess");
 	
 	    if (message != null) {
 	    	if(sucess == true){
 	%>
 		<div class="d-flex justify-content-center mt-3">
-		    <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
-		        <%= message %>
-		        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </div>
-		</div>
+	        <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+	            Link encurtado com sucesso: <a href="logged.do?action=redirecionarLink&url_encurtada=<%= message %>">
+	            <%= message %></a>
+	            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	        </div>
+    	</div>
 	<%
 	    }else{
 	    	%><div class="d-flex justify-content-center mt-3">

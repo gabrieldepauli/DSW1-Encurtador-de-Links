@@ -12,6 +12,7 @@ public class LinkDaoImp implements LinkDao{
 	
 	private static final String INSERT = "INSERT INTO link (url_original, url_encurtada, email_criador) VALUES (?, ?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM link WHERE id = ? AND email_criador = ?";
+	private static final String SELECT_BY_URL_ENCURTADA = "SELECT * FROM link WHERE url_encurtada = ?";
 	private static final String SELECT_ALL = "SELECT * FROM link WHERE email_criador = ? ORDER BY id";
 	private static final String UPDATE = "UPDATE link SET url_original = ?, url_encurtada = ? WHERE id = ? AND email_criador = ?";
 	private static final String DELETE = "DELETE FROM link WHERE id = ? AND email_criador = ?";
@@ -55,6 +56,29 @@ public class LinkDaoImp implements LinkDao{
 				if (result.next()) {
 					link = new Link();
 					link.setId(result.getInt(id));
+					link.setUrl_original(result.getString("url_original"));
+					link.setUrl_encurtada(result.getString("url_encurtada"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return link;
+	}
+	
+	@Override
+	public Link getByURLencurtada(String urlEncurtada) {
+		Link link = null;
+		if (urlEncurtada != null && !urlEncurtada.isEmpty()) {
+			try (var connection = DatabaseConnection.getConnection();
+				 var preparedStatement = connection.prepareStatement(SELECT_BY_ID)){
+				
+				preparedStatement.setString(1, urlEncurtada);
+
+				ResultSet result = preparedStatement.executeQuery();
+				if (result.next()) {
+					link = new Link();
+					link.setId(result.getInt("id"));
 					link.setUrl_original(result.getString("url_original"));
 					link.setUrl_encurtada(result.getString("url_encurtada"));
 				}
