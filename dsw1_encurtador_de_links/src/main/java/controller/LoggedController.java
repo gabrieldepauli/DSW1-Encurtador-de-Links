@@ -13,6 +13,8 @@ import controller.command.RedirecionarLinkCommand;
 import controller.command.LoggedCommands.EncurtarLinkCommand;
 import controller.command.LoggedCommands.LogoutCommand;
 import controller.command.LoggedCommands.PageEncurtadorCommand;
+import controller.command.LoggedCommands.PagePersonalizarCommand;
+import controller.command.LoggedCommands.PersonalizarLinkCommand;
 import controller.command.LoggedCommands.UserPageCommand;
 
 @WebServlet("/logged.do")
@@ -36,7 +38,11 @@ public class LoggedController extends HttpServlet {
 		} else if("logout".equals(action)) { 
 			command = new LogoutCommand();		
 		} else if("pageEncurtador".equals(action)) { 
-			command = new PageEncurtadorCommand();		
+			command = new PageEncurtadorCommand();	
+		} else if("pagePersonalizarLink".equals(action)) { 
+			command = new PagePersonalizarCommand();
+		} else if("personalizarLink".equals(action)) { 
+			command = new PersonalizarLinkCommand();
 		} else if("encurtarLink".equals(action)) { 
 			command = new EncurtarLinkCommand();
 		} else {
