@@ -71,7 +71,7 @@ public class LinkDaoImp implements LinkDao{
 		Link link = null;
 		if (urlEncurtada != null && !urlEncurtada.isEmpty()) {
 			try (var connection = DatabaseConnection.getConnection();
-				 var preparedStatement = connection.prepareStatement(SELECT_BY_ID)){
+				 var preparedStatement = connection.prepareStatement(SELECT_BY_URL_ENCURTADA)){
 				
 				preparedStatement.setString(1, urlEncurtada);
 

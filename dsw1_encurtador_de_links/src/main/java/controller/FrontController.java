@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import controller.command.Command;
 import controller.command.ErrorCommand;
+import controller.command.ErrorPageCommand;
+import controller.command.RedirecionarLinkCommand;
 import controller.command.FrontCommands.CadastroCommand;
 import controller.command.FrontCommands.FormCadastroCommand;
 import controller.command.FrontCommands.FormLoginCommand;
@@ -40,13 +42,19 @@ public class FrontController extends HttpServlet {
 			command = new CadastroCommand();
 		} else if("getLogin".equals(action)) {
 			command = new LoginCommand();
+		} else if("redirecionarLink".equals(action)) { 
+			command = new RedirecionarLinkCommand();
+		} else if("errorPage".equals(action)) { 
+			command = new ErrorPageCommand();
 		} else {
 			command = new ErrorCommand();
 		}
 		
 		String view = command.execute(request, response);
-		var dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		if (view != null) {
+	        var dispatcher = request.getRequestDispatcher(view);
+	        dispatcher.forward(request, response);
+	    }
 		
 	}
 

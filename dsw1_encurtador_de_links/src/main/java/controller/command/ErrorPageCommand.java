@@ -1,19 +1,18 @@
-package controller.command.LoggedCommands;
+package controller.command;
 
 import java.io.IOException;
 
-import controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class RedirecionarLinkCommand implements Command{
+public class ErrorPageCommand implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
+		return "erro.jsp";
 	}
 
 }

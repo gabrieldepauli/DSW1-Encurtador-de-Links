@@ -26,7 +26,7 @@
     </div>
     
     <div class="text-center mt-4">
-        <a href="index.jsp" style="text-decoration: none;">
+        <a href="logged.do?action=userPage" style="text-decoration: none;">
             <button class="btn btn-danger" style="font-weight: bold;">Voltar</button>
         </a>
     </div>
@@ -40,7 +40,7 @@
 	%>
 		<div class="d-flex justify-content-center mt-3">
 	        <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
-	            Link encurtado com sucesso: <a href="logged.do?action=redirecionarLink&url_encurtada=<%= message %>">
+	            Link encurtado com sucesso: <a href="front.do?action=redirecionarLink&url_encurtada=<%=message%>">
 	            <%= message %></a>
 	            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	        </div>
