@@ -13,6 +13,8 @@
 	<br><br>
 	
 	<div class="container border p-4 shadow-sm rounded" style="max-width: 600px; margin: 0 auto;">
+		<br><br>
+	
 		<a href="logged.do?action=pageEncurtador" style="text-decoration: none;">
 	    	<button class="btn btn-success btn-block w-100" style="font-size: 15px; font-weight: bold;">Encurtar Link</button>
 		</a>
@@ -29,9 +31,19 @@
 		<hr>
 		<br><br>
 		
+		<a href="logged.do?action=listLinks" style="text-decoration: none;">
+	    	<button class="btn btn-success btn-block w-100" style="font-size: 15px; font-weight: bold;">Meus Links</button>
+		</a>
+		
+		<br><br>
+		<hr>
+		<br><br>		
+		
 		<a href="logged.do?action=logout" style="text-decoration: none;">
 	    	<button class="btn btn-danger btn-block w-100" style="font-size: 15px; font-weight: bold;">Logout</button>
 		</a>
+		
+		<br><br>
 	</div>
 		
 </body>

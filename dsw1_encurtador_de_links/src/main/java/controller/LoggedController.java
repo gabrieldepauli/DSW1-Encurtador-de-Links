@@ -10,9 +10,12 @@ import java.io.IOException;
 import controller.command.Command;
 import controller.command.ErrorCommand;
 import controller.command.RedirecionarLinkCommand;
+import controller.command.LoggedCommands.DeleteCommand;
 import controller.command.LoggedCommands.EncurtarLinkCommand;
+import controller.command.LoggedCommands.ListarLinksCommand;
 import controller.command.LoggedCommands.LogoutCommand;
 import controller.command.LoggedCommands.PageEncurtadorCommand;
+import controller.command.LoggedCommands.PageMeusLinksCommand;
 import controller.command.LoggedCommands.PagePersonalizarCommand;
 import controller.command.LoggedCommands.PersonalizarLinkCommand;
 import controller.command.LoggedCommands.UserPageCommand;
@@ -45,6 +48,12 @@ public class LoggedController extends HttpServlet {
 			command = new PersonalizarLinkCommand();
 		} else if("encurtarLink".equals(action)) { 
 			command = new EncurtarLinkCommand();
+		} else if("listLinks".equals(action)) { 
+			command = new ListarLinksCommand();
+		} else if("pageMeusLinks".equals(action)) { 
+			command = new PageMeusLinksCommand();
+		} else if("delete".equals(action)) { 
+			command = new DeleteCommand();
 		} else {
 			command = new ErrorCommand();
 		}

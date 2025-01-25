@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+	<br><br><br>
+	<h1 style="text-align: center;">Personalizar Link</h1>
 
 	<div class="d-flex justify-content-center mt-4">
         <div class="border p-4" style="width: 300px; border-radius: 8px;">
@@ -28,12 +30,6 @@
                 </div>
             </form>
         </div>
-    </div>
-    
-    <div class="text-center mt-4">
-        <a href="logged.do?action=userPage" style="text-decoration: none;">
-            <button class="btn btn-danger" style="font-weight: bold;">Voltar</button>
-        </a>
     </div>
 
  	<%
@@ -61,5 +57,11 @@
 	    }
 	    }
 	%>
+	
+	<div class="text-center mt-4">
+        <a href="logged.do?action=userPage" style="text-decoration: none;">
+            <button class="btn btn-danger" style="font-weight: bold;">Voltar</button>
+        </a>
+    </div>
 </body>
 </html>
