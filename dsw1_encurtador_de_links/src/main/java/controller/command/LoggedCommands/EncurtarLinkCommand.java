@@ -25,7 +25,7 @@ public class EncurtarLinkCommand implements Command{
         return uuid.substring(0, tamanho);
     }
 
-    public static String encurtarLink(String urlOriginal) {
+    public static String encurtarLink() {
         String baseUrl = "https://encurtado.com/";
         String identificador = gerarIdentificadorUUID();
         return baseUrl + identificador;
@@ -37,7 +37,7 @@ public class EncurtarLinkCommand implements Command{
 		
 		 String urlOriginal = request.getParameter("link");
 		    
-		 String urlEncurtada = encurtarLink(urlOriginal);
+		 String urlEncurtada = encurtarLink();
 		    
 		 User usuario = (User) request.getSession().getAttribute("user_id");
 		 Link link = new Link();

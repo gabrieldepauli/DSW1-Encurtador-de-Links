@@ -4,29 +4,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Encurtar link</title>
+<title>Modificar Link</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<br><br><br>
-	<h1 style="text-align: center;">Encurtar Link</h1>
+	<h1 style="text-align: center;">Modificar Link</h1>
+	
+	<%
+		int idLink = (Integer) request.getAttribute("id");
+	%>
 
 	<div class="d-flex justify-content-center mt-4">
         <div class="border p-4" style="width: 300px; border-radius: 8px;">
-            <form method="post" action="logged.do?action=encurtarLink" style="text-align: center;">
+            <form method="post" action="logged.do?action=updateLink&id=<%=idLink%>" style="text-align: center;">
                 <div style="margin-bottom: 15px;">
                     <label for="link" style="display: block; font-size: 16px; font-weight: bold;">Link original:</label>
-                    <input type="url" id="link" name="link" placeholder="Informe o link." style="padding: 10px; font-size: 14px; width: 100%; text-align: center;" required="required">
+                    <input type="url" id="link" name="link" placeholder="Informe o novo link." style="padding: 10px; font-size: 14px; width: 100%; text-align: center;" required="required">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="personalizacao" style="display: block; font-size: 16px; font-weight: bold;">Identificador (opcional):</label>
+                    <input type="text" id="personalizacao" name="personalizacao" placeholder="Informe a nova chave de personalização." style="padding: 10px; font-size: 14px; width: 100%; text-align: center;">
                 </div>
 
                 <div>
-                    <button type="submit" style="padding: 10px 20px; font-size: 15px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto;">Encurtar</button>
+                    <button type="submit" style="padding: 10px 20px; font-size: 15px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto;">Modificar</button>
                 </div>
             </form>
         </div>
     </div>
-    
 
  	<%
 	    String message = (String) request.getAttribute("message");
@@ -37,7 +45,7 @@
 	%>
 		<div class="d-flex justify-content-center mt-3">
 	        <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
-	            Link encurtado com sucesso: <a href="front.do?action=redirecionarLink&url_encurtada=<%=message%>">
+	            Link modificado com sucesso: <a href="front.do?action=redirecionarLink&url_encurtada=<%=message%>">
 	            <%= message %></a>
 	            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	        </div>
@@ -55,7 +63,7 @@
 	%>
 	
 	<div class="text-center mt-4">
-        <a href="logged.do?action=userPage" style="text-decoration: none;">
+        <a href="logged.do?action=listLinks" style="text-decoration: none;">
             <button class="btn btn-danger" style="font-weight: bold;">Voltar</button>
         </a>
     </div>

@@ -21,7 +21,7 @@
                 </div>
                 
                 <div style="margin-bottom: 15px;">
-                    <label for="personalizacao" style="display: block; font-size: 16px; font-weight: bold;">Link original:</label>
+                    <label for="personalizacao" style="display: block; font-size: 16px; font-weight: bold;">Identificador:</label>
                     <input type="text" id="personalizacao" name="personalizacao" placeholder="Informe a chave de personalização." style="padding: 10px; font-size: 14px; width: 100%; text-align: center;" required="required">
                 </div>
 
@@ -49,10 +49,10 @@
 	<%
 	    }else{
 	    	%><div class="d-flex justify-content-center mt-3">
-		    <div class="alert alert-secundary alert-dismissible fade show text-center" role="alert">
-		        <%= message %>
-		        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </div>
+		    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    			<%= message %>
+    			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
 		</div> <%
 	    }
 	    }

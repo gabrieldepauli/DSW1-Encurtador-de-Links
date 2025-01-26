@@ -12,7 +12,7 @@ import model.entity.User;
 
 public class PersonalizarLinkCommand implements Command{
 	
-	private String encurtarLink(String urlOriginal, String identificadorPersonalizado) {
+	private String encurtarLink(String identificadorPersonalizado) {
         String baseUrl = "https://encurtado.com/";
         
         if (identificadorPersonalizado == null || identificadorPersonalizado.isEmpty()) {
@@ -35,7 +35,7 @@ public class PersonalizarLinkCommand implements Command{
             return "logged.do?action=pagePersonalizarLink";  
         }
 		
-		String urlEncurtada = encurtarLink(urlOriginal, identificadorPersonalizado);
+		String urlEncurtada = encurtarLink(identificadorPersonalizado);
 		
 		if(urlEncurtada != null) {
 			User usuario = (User) request.getSession().getAttribute("user_id");

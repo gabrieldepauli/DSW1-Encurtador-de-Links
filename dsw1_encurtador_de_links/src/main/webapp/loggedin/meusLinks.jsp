@@ -51,7 +51,7 @@
 				<td><%= link.getUrl_original() %></td>
 				<td><%= link.getUrl_encurtada() %></td>
 				<td><a href="logged.do?action=verDados&id=<%=link.getId()%>">Ver Dados</a></td>
-				<td><a href="logged.do?action=update&id=<%=link.getId()%>">Modficar Link</a></td>
+				<td><a href="logged.do?action=pageUpdate&id=<%=link.getId()%>">Modficar Link</a></td>
 				<td><a href="logged.do?action=delete&id=<%=link.getId()%>">Deletar Link</a></td>
 			</tr>
 			<%i++;} %>

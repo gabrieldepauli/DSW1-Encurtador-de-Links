@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import controller.command.Command;
 import controller.command.ErrorCommand;
+import controller.command.LoggedCommandFactory;
 import controller.command.RedirecionarLinkCommand;
 import controller.command.LoggedCommands.DeleteCommand;
 import controller.command.LoggedCommands.EncurtarLinkCommand;
@@ -33,32 +34,9 @@ public class LoggedController extends HttpServlet {
 	}
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Command command = null;
 		String action = request.getParameter("action");
 		
-		if("userPage".equals(action)) { 
-			command = new UserPageCommand();
-		} else if("logout".equals(action)) { 
-			command = new LogoutCommand();		
-		} else if("pageEncurtador".equals(action)) { 
-			command = new PageEncurtadorCommand();	
-		} else if("pagePersonalizarLink".equals(action)) { 
-			command = new PagePersonalizarCommand();
-		} else if("personalizarLink".equals(action)) { 
-			command = new PersonalizarLinkCommand();
-		} else if("encurtarLink".equals(action)) { 
-			command = new EncurtarLinkCommand();
-		} else if("listLinks".equals(action)) { 
-			command = new ListarLinksCommand();
-		} else if("pageMeusLinks".equals(action)) { 
-			command = new PageMeusLinksCommand();
-		} else if("delete".equals(action)) { 
-			command = new DeleteCommand();
-		} else {
-			command = new ErrorCommand();
-		}
-		
-		String view = command.execute(request, response);
+		String view = new LoggedCommandFactory().getCommand(action, request, response).execute(request, response);
 		var dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 		

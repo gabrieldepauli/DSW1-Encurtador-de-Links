@@ -55,7 +55,7 @@ public class LinkDaoImp implements LinkDao{
 				ResultSet result = preparedStatement.executeQuery();
 				if (result.next()) {
 					link = new Link();
-					link.setId(result.getInt(id));
+					link.setId(result.getInt("id"));
 					link.setUrl_original(result.getString("url_original"));
 					link.setUrl_encurtada(result.getString("url_encurtada"));
 				}

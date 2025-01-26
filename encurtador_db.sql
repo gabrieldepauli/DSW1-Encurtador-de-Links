@@ -13,7 +13,7 @@ select * from usuario;
 CREATE TABLE link (
     id INT AUTO_INCREMENT PRIMARY KEY,
     url_original TEXT NOT NULL,
-    url_encurtada VARCHAR(30) NOT NULL UNIQUE,
+    url_encurtada VARCHAR(40) NOT NULL UNIQUE,
     email_criador VARCHAR(128),
     FOREIGN KEY (email_criador) REFERENCES usuario(email)
 );
