@@ -35,7 +35,6 @@ public class UpdateLinkCommand implements Command{
 		String novaPersonalizacao = request.getParameter("personalizacao");
 		Link link = dao.getByID(user, idLink);
 		String linkEncurtado = link.getUrl_encurtada();
-		System.out.println(linkEncurtado);
 		
 		if(novaPersonalizacao != null && !novaPersonalizacao.isEmpty()) {
 			if (novaPersonalizacao.length() > 12) {
