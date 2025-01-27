@@ -19,10 +19,18 @@
         <%
             List<Link> links = (List<Link>) request.getAttribute("lista_links");
             String message = (String) request.getAttribute("message");
+            String messageType = (String) request.getAttribute("messageType");
         %>
 
-        <% if (message != null) { %>
-            <div class="alert alert-danger text-center" role="alert"><%= message %></div>
+        <% if (message != null) { 
+        		String alertClass = "success".equals(messageType) ? "alert-success" : "alert-danger";
+        %>
+            <div class="d-flex justify-content-center mt-3">
+            <div class="alert <%= alertClass %> alert-dismissible fade show text-center" role="alert">
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
         <% } %>
 
         <table class="table table-bordered mt-4">

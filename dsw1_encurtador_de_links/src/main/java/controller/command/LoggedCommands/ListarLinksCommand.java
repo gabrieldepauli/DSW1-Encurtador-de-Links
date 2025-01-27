@@ -27,6 +27,7 @@ public class ListarLinksCommand implements Command{
 		
 		if(links.isEmpty()) {
 			request.setAttribute("message", "Sua lista de links está vazia!");
+			request.setAttribute("messageType", "error");
 		}	
 		
 		request.setAttribute("lista_links", links);

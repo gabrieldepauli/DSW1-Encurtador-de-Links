@@ -32,8 +32,10 @@ public class DeleteCommand implements Command{
 		
 		if(deleted) {
 			message = "Link deletado com sucesso!";
+			request.setAttribute("messageType", "success");
 		}else {
 			message = "Não foi possivel deletar o link!";
+			request.setAttribute("messageType", "error");
 		}
 		
 		request.setAttribute("message", message);
