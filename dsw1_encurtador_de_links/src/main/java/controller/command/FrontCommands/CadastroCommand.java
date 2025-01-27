@@ -27,8 +27,10 @@ public class CadastroCommand implements Command{
 		String mensagem;
 		if(cadastrado) {
 			mensagem = "Usuário cadastrado com sucesso!";
+			request.setAttribute("messageType", "success");
 		}else {
 			mensagem = "Erro ao cadastrar usuário";
+			request.setAttribute("messageType", "error");
 		}
 		
 		request.setAttribute("message", mensagem);

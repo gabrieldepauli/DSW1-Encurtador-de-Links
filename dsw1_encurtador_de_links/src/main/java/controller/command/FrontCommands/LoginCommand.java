@@ -36,6 +36,7 @@ public class LoginCommand implements Command {
 			message = "Usuário ou senha inválido.";
             
             request.setAttribute("message", message);
+            request.setAttribute("messageType", "error");
 			
 			view = "front.do?action=loginForm";
 		}

@@ -16,6 +16,8 @@ public class DeleteCommand implements Command{
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		String message = "";
+		
 		var sessao = request.getSession(false);
 		
 		User user = (User) sessao.getAttribute("user_id");
@@ -27,7 +29,6 @@ public class DeleteCommand implements Command{
 		Link link = dao.getByID(user, id);
 		
 		boolean deleted = dao.delete(user, link);
-		String message;
 		
 		if(deleted) {
 			message = "Link deletado com sucesso!";

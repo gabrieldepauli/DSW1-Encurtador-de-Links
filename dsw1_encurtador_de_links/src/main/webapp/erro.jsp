@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Error</title>
+<link rel="icon" type="image/png" href="<%= request.getContextPath() %>/images/logoEncurtador.png">
 </head>
 <body>
 	<%
