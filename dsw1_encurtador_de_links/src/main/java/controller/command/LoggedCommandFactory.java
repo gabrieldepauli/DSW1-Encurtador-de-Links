@@ -4,10 +4,12 @@ import controller.command.FrontCommands.CadastroCommand;
 import controller.command.FrontCommands.FormCadastroCommand;
 import controller.command.FrontCommands.FormLoginCommand;
 import controller.command.FrontCommands.LoginCommand;
+import controller.command.LoggedCommands.ListarAcessosCommand;
 import controller.command.LoggedCommands.DeleteCommand;
 import controller.command.LoggedCommands.EncurtarLinkCommand;
 import controller.command.LoggedCommands.ListarLinksCommand;
 import controller.command.LoggedCommands.LogoutCommand;
+import controller.command.LoggedCommands.PageAcessosCommand;
 import controller.command.LoggedCommands.PageEncurtadorCommand;
 import controller.command.LoggedCommands.PageMeusLinksCommand;
 import controller.command.LoggedCommands.PagePersonalizarCommand;
@@ -47,7 +49,13 @@ public class LoggedCommandFactory {
 				return new PageUpdateCommand();
 			} else if("updateLink".equals(action)) { 
 				return new UpdateLinkCommand();
-			} else {
+			}else if("verDados".equals(action)) {
+				return new ListarAcessosCommand();
+			}else if("pageAcessos".equals(action)){
+				return new PageAcessosCommand();
+			}	
+			else {
+			
 				return new ErrorCommand();
 			}
 		}

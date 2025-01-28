@@ -1,11 +1,13 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.entity.Link" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="model.entity.Acesso" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
     <meta charset="UTF-8">
-    <title>Meus Links</title>
+    <title>Acessos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -13,11 +15,11 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Meus Links</h1>
+        <h1 class="text-center">Acessos</h1>
         <hr>
 
         <%
-            List<Link> links = (List<Link>) request.getAttribute("lista_links");
+            List<Acesso> acessos = (List<Acesso>) request.getAttribute("lista_acessos");
             String message = (String) request.getAttribute("message");
             String messageType = (String) request.getAttribute("messageType");
         %>
@@ -36,25 +38,15 @@
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
-                    <th class="text-center">ID</th>
-                    <th class="text-center">URL Original</th>
-                    <th class="text-center">URL Encurtada</th>
-                    <th class="text-center">Ver Dados</th>
-                    <th class="text-center">Modificar</th>
-                    <th class="text-center">Deletar</th>
+                    <th class="text-center">IP</th>
                 </tr>
             </thead>
             <tbody>
                 <%
-                    for (Link link : links) {
+                    for (Acesso acesso : acessos) {
                 %>
                     <tr>
-                        <td class="text-center"><%= link.getId() %></td>
-                        <td class="text-center"><%= link.getUrl_original() %></td>
-                        <td class="text-center"><%= link.getUrl_encurtada() %></td>
-                        <td class="text-center"><a href="logged.do?action=verDados&id=<%= link.getId() %>" class="btn btn-info">Ver Acessos</a></td>
-                        <td class="text-center"><a href="logged.do?action=pageUpdate&id=<%= link.getId() %>" class="btn btn-warning">Modificar</a></td>
-                        <td class="text-center"><a href="logged.do?action=delete&id=<%= link.getId() %>" class="btn btn-danger">Deletar</a></td>
+                        <td class="text-center"><%= acesso.getIp_cliente()%></td>
                     </tr>
                 <% } %>
             </tbody>
