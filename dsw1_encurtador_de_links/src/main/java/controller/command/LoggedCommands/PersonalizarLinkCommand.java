@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.dao.LinkDaoFactory;
 import model.entity.Link;
 import model.entity.User;
+import model.enums.DaoImplementation;
 
 public class PersonalizarLinkCommand implements Command{
 	
@@ -43,7 +44,7 @@ public class PersonalizarLinkCommand implements Command{
 	        link.setUrl_original(urlOriginal);
 	        link.setUrl_encurtada(urlEncurtada);
 	        
-	        var dao = new LinkDaoFactory().factory();
+	        var dao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 	        boolean sucesso = dao.create(usuario, link);
 	        
 	        if (sucesso) {

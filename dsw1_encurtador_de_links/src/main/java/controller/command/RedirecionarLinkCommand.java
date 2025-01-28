@@ -9,6 +9,7 @@ import model.dao.AcessoDaoFactory;
 import model.dao.LinkDaoFactory;
 import model.entity.Acesso;
 import model.entity.Link;
+import model.enums.DaoImplementation;
 
 public class RedirecionarLinkCommand implements Command{
 
@@ -17,7 +18,7 @@ public class RedirecionarLinkCommand implements Command{
 			throws ServletException, IOException {
 		
 		String urlEncurtada = request.getParameter("url_encurtada");
-		var daoLink = new LinkDaoFactory().factory();
+		var daoLink = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 		var daoAcesso = new AcessoDaoFactory().factory();
 		
 		if(urlEncurtada != null && !urlEncurtada.isEmpty()) {

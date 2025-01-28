@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.dao.LinkDaoFactory;
 import model.entity.Link;
 import model.entity.User;
+import model.enums.DaoImplementation;
 
 public class UpdateLinkCommand implements Command{
 	
@@ -29,7 +30,7 @@ public class UpdateLinkCommand implements Command{
 		var sessao = request.getSession(false);
 		int idLink = Integer.parseInt(request.getParameter("id"));
 		User user = (User) sessao.getAttribute("user_id");
-		var dao = new LinkDaoFactory().factory();
+		var dao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 		
 		String novaURL = request.getParameter("link");
 		String novaPersonalizacao = request.getParameter("personalizacao");

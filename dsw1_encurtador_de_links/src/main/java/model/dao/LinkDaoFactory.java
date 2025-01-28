@@ -1,9 +1,14 @@
 package model.dao;
 
+import model.enums.DaoImplementation;
+
 public class LinkDaoFactory {
 
-	public LinkDao factory() {
-		return new LinkDaoImp();
+	public static LinkDao getInstance(DaoImplementation implementation) {
+		if (DaoImplementation.MYSQL.equals(implementation)) {			
+			return new LinkDaoImp();
+		}
+		
+		return null;
 	}
-	
 }

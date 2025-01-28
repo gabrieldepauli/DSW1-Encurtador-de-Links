@@ -1,14 +1,14 @@
-create database encurtador_db;
+CREATE DATABASE encurtador_db;
 
-use encurtador_db;
+USE encurtador_db;
 
-create table usuario(
+CREATE TABLE usuario(
 	nome VARCHAR(128) NOT NULL,
 	email VARCHAR(128) NOT NULL PRIMARY KEY,
 	senha VARCHAR(128) NOT NULL
 );
 
-select * from usuario;
+SELECT * FROM usuario;
 
 CREATE TABLE link (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,7 +18,10 @@ CREATE TABLE link (
     FOREIGN KEY (email_criador) REFERENCES usuario(email)
 );
 
-select * from url;
+ALTER TABLE link
+MODIFY url_encurtada VARCHAR(100) NOT NULL UNIQUE;
+
+SELECT * FROM link;
 
 CREATE TABLE acessos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,3 +29,5 @@ CREATE TABLE acessos (
     ip_cliente VARCHAR(100) NOT NULL,
     FOREIGN KEY (url_id) REFERENCES link(id)
 );
+
+SELECT * FROM acessos;

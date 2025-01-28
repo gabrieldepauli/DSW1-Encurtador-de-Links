@@ -8,13 +8,13 @@ import controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.dao.LinkDao;
 import model.dao.LinkDaoFactory;
-import model.dao.LinkDaoImp;
 import model.entity.Link;
 import model.entity.User;
+import model.enums.DaoImplementation;
 
 public class EncurtarLinkCommand implements Command{
+	private static final String BASE_URL = "/encurtado.com/link/";
 
     public static String gerarIdentificadorUUID() {	
     	Random random = new Random();
@@ -26,9 +26,9 @@ public class EncurtarLinkCommand implements Command{
     }
 
     public static String encurtarLink() {
-        String baseUrl = "https://encurtado.com/";
         String identificador = gerarIdentificadorUUID();
-        return baseUrl + identificador;
+        String url = BASE_URL + identificador;
+        return url;
     }
 
 	@Override
@@ -44,7 +44,7 @@ public class EncurtarLinkCommand implements Command{
 		 link.setUrl_original(urlOriginal);
 		 link.setUrl_encurtada(urlEncurtada);
 		    
-		 var linkDao = new LinkDaoFactory().factory();
+		 var linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 		 boolean sucess = linkDao.create(usuario, link);
 		    
 		 if (sucess) {

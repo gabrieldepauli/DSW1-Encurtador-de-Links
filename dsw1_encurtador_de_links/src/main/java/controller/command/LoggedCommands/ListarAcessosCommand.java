@@ -12,6 +12,7 @@ import model.dao.LinkDaoFactory;
 import model.entity.Acesso;
 import model.entity.Link;
 import model.entity.User;
+import model.enums.DaoImplementation;
 
 public class ListarAcessosCommand implements Command {
 
@@ -20,7 +21,7 @@ public class ListarAcessosCommand implements Command {
 			throws ServletException, IOException {
 		
 		var dao = new AcessoDaoFactory().factory();
-		var linkDao = new LinkDaoFactory().factory();
+		var linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 
 		var sessao = request.getSession(false);
 		

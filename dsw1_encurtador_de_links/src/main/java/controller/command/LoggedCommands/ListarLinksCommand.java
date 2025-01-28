@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.dao.LinkDaoFactory;
 import model.entity.Link;
 import model.entity.User;
+import model.enums.DaoImplementation;
 
 public class ListarLinksCommand implements Command{
 
@@ -17,7 +18,7 @@ public class ListarLinksCommand implements Command{
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		var dao = new LinkDaoFactory().factory();
+		var dao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 		
 		var sessao = request.getSession(false);
 		

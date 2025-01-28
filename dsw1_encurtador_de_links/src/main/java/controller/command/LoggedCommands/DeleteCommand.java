@@ -5,6 +5,7 @@ import java.io.IOException;
 import model.dao.LinkDaoFactory;
 import model.entity.Link;
 import model.entity.User;
+import model.enums.DaoImplementation;
 import controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class DeleteCommand implements Command{
 		
 		User user = (User) sessao.getAttribute("user_id");
 		
-		var dao = new LinkDaoFactory().factory();
+		var dao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
