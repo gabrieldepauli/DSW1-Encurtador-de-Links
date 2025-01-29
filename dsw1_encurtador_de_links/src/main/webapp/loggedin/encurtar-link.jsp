@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <form action="/encurtado.com/front.do" method="POST">
                     	<input type="hidden" name="command" value="LinkCommand">
-                		<input type="hidden" name="action" value="shorten">
+                		<input type="hidden" name="action" value="create">
                     
                         <div class="mb-3">
                             <label for="link" class="form-label">Link original</label>

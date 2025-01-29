@@ -12,24 +12,38 @@
 </head>
 <body class="bg-light">
 
+	<%
+		var linkId = (Integer) request.getAttribute("linkId");
+	%>
+
     <div class="container mt-5">
         <h1 class="text-center mb-4">Personalizar Link</h1>
 
-        <div class="d-flex justify-content-center">
-            <div class="card shadow-sm" style="width: 100%; max-width: 400px; border-radius: 12px;">
+        <div class="align-items-center">
+            <div class="card mx-auto" style="width:600px">
                 <div class="card-body">
-                    <form method="post" action="logged.do?action=personalizarLink">
-                        <div class="mb-3">
-                            <label for="link" class="form-label">Link original</label>
+                    
+                    <form method="post" action="/encurtado.com/front.do">
+                    	<input type="hidden" name="command" value="LinkCommand">
+                    	<input type="hidden" name="action"  value="create">
+                    	<input type="hidden" name="id"  value="<%= linkId != null ? linkId : "" %>">
+                    
+                        <label for="link" class="form-label">Link original</label>
+
+                        <div class="input-group mb-3">
                             <input type="url" id="link" name="link" class="form-control" placeholder="Informe o link" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="personalizacao" class="form-label">Identificador</label>
-                            <input type="text" id="personalizacao" name="personalizacao" class="form-control" placeholder="Informe a chave de personalização" required>
-                        </div>
+                        <label for="identifier">Identificador</label>
+                        
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text opacity-75" id="basic-addon3">encurtado.com/</span>
+							</div>
+							<input type="text" class="form-control" id="identifier" name="identifier" aria-describedby="basic-addon3">
+						</div>
 
-                        <button type="submit" class="btn btn-success w-100">Encurtar</button>
+						<button type="submit" class="btn btn-success w-100">Encurtar</button>
                     </form>
                 </div>
             </div>
@@ -38,6 +52,8 @@
         <div class="text-center mt-4">
             <a href="/encurtado.com/loggedin/logged.jsp" class="btn btn-danger">Voltar</a>
         </div>
+
+        <%@ include file="/includes/messages.jsp" %>
     </div>
 
 </body>

@@ -25,8 +25,8 @@ public class LinkCommand implements Command {
 		
 		String action = request.getParameter("action");
 	
-		if ("shorten".equals(action)) {
-			return encurtar(request);
+		if ("create".equals(action)) {
+			return createLink(request);
 		}
 		else if ("getLinks".equals(action)) {
 			return getUserLinks(request);
@@ -38,12 +38,16 @@ public class LinkCommand implements Command {
 		return null;
 	}
 	
-	private String encurtar(HttpServletRequest request) {
+	private String createLink(HttpServletRequest request) {
+				
 		String urlOriginal = request.getParameter("link");
-		String urlEncurtada = getShortenedLink();
-		User usuario = (User) request.getSession().getAttribute("user_id");
+		String identifier = request.getParameter("identifier");
 		
-		Link link = new Link(urlOriginal, urlEncurtada);;
+		String urlEncurtada = getShortenedLink(identifier);
+		
+		Link link = new Link(urlOriginal, urlEncurtada);
+		
+		User usuario = getLoggedUser(request);
 		
 		boolean sucess = linkDao.create(usuario, link);
 	    
@@ -53,7 +57,8 @@ public class LinkCommand implements Command {
 		     request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
 		 }
 		
-		return "/loggedin/encurtar-link.jsp";
+		return  StringUtils.isNotBlank(identifier) ? 
+				"/loggedin/personalizar-link.jsp" : "/loggedin/encurtar-link.jsp";
 	}
 	
 	private String getUserLinks(HttpServletRequest request) {
@@ -102,10 +107,13 @@ public class LinkCommand implements Command {
 		return null;
 	}
 	
-	public String getShortenedLink() {
-		String identificador = generateCode();
-		String url = BASE_URL + identificador;
-		return url;
+	public String getShortenedLink(String identifier) {
+		
+		if (identifier != null) {
+			return BASE_URL + identifier;
+		}
+		
+		return BASE_URL + generateCode();
 	}
 
     public String generateCode() {	
