@@ -23,7 +23,7 @@
                     <span class="text-dark fw-bold">Ainda não tem uma conta?</span>
                 </div>
                 
-                <a href="/cadastro.jsp" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
+                <a href="/encurtado.com/cadastro.jsp" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
             </div>
         </div>
     </div>

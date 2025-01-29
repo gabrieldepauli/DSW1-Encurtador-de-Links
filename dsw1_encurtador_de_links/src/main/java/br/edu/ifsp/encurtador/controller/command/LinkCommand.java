@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.tomcat.jakartaee.commons.lang3.StringUtils;
 
 import br.edu.ifsp.encurtador.model.dao.LinkDao;
 import br.edu.ifsp.encurtador.model.dao.LinkDaoFactory;
@@ -30,6 +30,9 @@ public class LinkCommand implements Command {
 		}
 		else if ("getLinks".equals(action)) {
 			return getUserLinks(request);
+		}
+		else if ("delete".equals(action)) {
+			return deleteLink(request);
 		}
 	
 		return null;
@@ -59,15 +62,44 @@ public class LinkCommand implements Command {
 		if (sessao != null) {
 			User user = (User) sessao.getAttribute("user_id");	
 			List<Link> links = linkDao.getAllLinks(user);
-			
-			if (CollectionUtils.isNotEmpty(links)) {
-				request.setAttribute("errorMessage", "Sua lista de links está vazia!");
-			}
-			
 			request.setAttribute("links", links);
 		}
 		
 		return "/loggedin/meus-links.jsp";
+	}
+	
+	private String deleteLink(HttpServletRequest request) {
+		String idString = request.getParameter("id");
+		Integer id = StringUtils.isNotBlank(idString) ? Integer.parseInt(idString) : null;
+		
+		if (id != null) {
+			var user = getLoggedUser(request);
+			
+			if (user != null) {
+				var link = linkDao.getByID(user, id);
+				boolean deletionSuccess = linkDao.delete(user, link);
+				
+				if (deletionSuccess) {
+					request.setAttribute("successMessage", "Link deletado com sucesso!");
+				}
+				else {
+					request.setAttribute("errorMessage", "Houve um problema ao deletar o link. Por favor, tente novamente.");
+				}
+			}
+		}
+		
+		return getUserLinks(request);
+	}
+	
+	private User getLoggedUser(HttpServletRequest request) {
+		var session = request.getSession(false);
+		
+		if (session != null) {
+			var user = (User) session.getAttribute("user_id");
+			return user;
+		}
+		
+		return null;
 	}
 	
 	public String getShortenedLink() {

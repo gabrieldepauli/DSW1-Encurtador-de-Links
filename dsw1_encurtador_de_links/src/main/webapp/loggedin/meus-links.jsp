@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.collections4.CollectionUtils"%>
 <%@ page import="java.util.List" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.Link" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -13,25 +14,16 @@
 </head>
 <body>
     <div class="container mt-5">
+    
+    	<%@ include file="/includes/messages.jsp" %>
+    
         <h1 class="text-center">Meus Links</h1>
+        
         <hr>
 
         <%
             List<Link> links = (List<Link>) request.getAttribute("links");
-            String message = (String) request.getAttribute("message");
-            String messageType = (String) request.getAttribute("messageType");
         %>
-
-        <% if (message != null) { 
-        		String alertClass = "success".equals(messageType) ? "alert-success" : "alert-danger";
-        %>
-            <div class="d-flex justify-content-center mt-3">
-            <div class="alert <%= alertClass %> alert-dismissible fade show text-center" role="alert">
-                <%= message %>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </div>
-        <% } %>
 
         <table class="table table-bordered mt-4">
             <thead>
@@ -46,17 +38,30 @@
             </thead>
             <tbody>
                 <%
-                    for (Link link : links) {
+                	if (CollectionUtils.isNotEmpty(links)) {
+                    	for (Link link : links) {
                 %>
-                    <tr>
-                        <td class="text-center"><%= link.getId() %></td>
-                        <td class="text-center"><%= link.getUrlOriginal() %></td>
-                        <td class="text-center"><%= link.getUrlEncurtada() %></td>
-                        <td class="text-center"><a href="logged.do?action=verDados&id=<%= link.getId() %>" class="btn btn-info">Ver Acessos</a></td>
-                        <td class="text-center"><a href="logged.do?action=pageUpdate&id=<%= link.getId() %>" class="btn btn-warning">Modificar</a></td>
-                        <td class="text-center"><a href="logged.do?action=delete&id=<%= link.getId() %>" class="btn btn-danger">Deletar</a></td>
-                    </tr>
-                <% } %>
+		                    <tr>
+		                        <td class="text-center"><%= link.getId() %></td>
+		                        <td class="text-center"><%= link.getUrlOriginal() %></td>
+		                        <td class="text-center"><%= link.getUrlEncurtada() %></td>
+		                        <td class="text-center"><a href="logged.do?action=verDados&id=<%= link.getId() %>" class="btn btn-info">Ver Acessos</a></td>
+		                        <td class="text-center"><a href="logged.do?action=pageUpdate&id=<%= link.getId() %>" class="btn btn-warning">Modificar</a></td>
+		                        <td class="text-center"><a href="/encurtado.com/front.do?command=LinkCommand&action=delete&id=<%= link.getId() %>" class="btn btn-danger">Deletar</a></td>
+		                    </tr>
+                <% 
+                		} 
+                	}
+                	else {
+                %>
+                			<tr> 
+                				<td colspan="6">
+                					<h4 class="text-center opacity-25">Você ainda não tem links encurtados</h4>
+                				</td>
+                			</tr>
+                <%	
+                	}
+                %>
             </tbody>
         </table>
 

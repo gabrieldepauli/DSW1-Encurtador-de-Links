@@ -23,7 +23,7 @@ public class UserCommand implements Command {
 		if ("login".equals(action)) { 
 			return login(request);
 		}
-		else if ("cadastro".equals(action)) {
+		else if ("cadastrar".equals(action)) {
 			return cadastrar(request);
 		}
 		else if ("logout".equals(action)) {

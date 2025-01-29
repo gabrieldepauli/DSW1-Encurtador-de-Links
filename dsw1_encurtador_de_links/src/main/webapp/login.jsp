@@ -45,7 +45,7 @@
         </div>
         
         <div class="text-center mt-4">
-            <p class="text-dark fw-bold">Não possui cadastro? <a href="front.do?action=cadastroForm" class="text-primary fw-bold">Cadastre-se</a></p>
+            <p class="text-dark fw-bold">Não possui cadastro? <a href="/encurtado.com/cadastro.jsp" class="text-primary fw-bold">Cadastre-se</a></p>
         </div>
     </div>
 </body>
