@@ -15,19 +15,19 @@
 
         <div class="border p-4 shadow-lg rounded mt-4" style="background-color: #f8f9fa; max-width: 500px; margin: 0 auto;">
 
-            <a href="logged.do?action=pageEncurtador" class="btn btn-success btn-lg w-100 mb-4" style="font-weight: bold;">
+            <a href="/encurtado.com/loggedin/encurtar-link.jsp" class="btn btn-success btn-lg w-100 mb-4" style="font-weight: bold;">
                 Encurtar Link
             </a><br>
 
-            <a href="logged.do?action=pagePersonalizarLink" class="btn btn-primary btn-lg w-100 mb-4" style="font-weight: bold;">
+            <a href="/encurtado.com/loggedin/personalizar-link.jsp" class="btn btn-primary btn-lg w-100 mb-4" style="font-weight: bold;">
                 Personalizar Link
             </a><br>
 
-            <a href="logged.do?action=listLinks" class="btn btn-info btn-lg w-100 mb-4 text-white" style="font-weight: bold;">
+            <a href="/encurtado.com/front.do?command=LinkCommand&action=getLinks" class="btn btn-info btn-lg w-100 mb-4 text-white" style="font-weight: bold;">
                 Meus Links
             </a><br>
             
-            <a href="logged.do?action=logout" class="btn btn-danger btn-lg w-100 mb-4" style="font-weight: bold;">
+            <a href="/encurtado.com/front.do?command=UserCommand&action=logout" class="btn btn-danger btn-lg w-100 mb-4" style="font-weight: bold;">
                 Logout
             </a>
         </div>

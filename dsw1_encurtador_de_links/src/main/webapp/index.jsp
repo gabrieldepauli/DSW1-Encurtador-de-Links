@@ -17,13 +17,13 @@
             <div class="border p-4 shadow rounded" style="width: 350px; background-color: #f8f9fa;">
                 <h3 class="text-center mb-4">Deseja logar no sistema?</h3>
                 
-                <a href="front.do?action=loginForm" class="btn btn-success btn-lg d-block mb-4 text-center">Log In</a>
+                <a href="/encurtado.com/login.jsp" class="btn btn-success btn-lg d-block mb-4 text-center">Log In</a>
                 
                 <div class="text-center mb-2">
                     <span class="text-dark fw-bold">Ainda não tem uma conta?</span>
                 </div>
                 
-                <a href="front.do?action=cadastroForm" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
+                <a href="/cadastro.jsp" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
             </div>
         </div>
     </div>
