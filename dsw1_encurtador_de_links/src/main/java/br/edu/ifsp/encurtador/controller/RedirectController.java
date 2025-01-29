@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/link/*")
+@WebServlet("/")
 public class RedirectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);

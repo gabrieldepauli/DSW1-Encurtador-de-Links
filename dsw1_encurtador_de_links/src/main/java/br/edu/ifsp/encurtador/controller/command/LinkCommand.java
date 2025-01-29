@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class LinkCommand implements Command {
 	
-	private static final String BASE_URL = "/encurtado.com/link/";
+	private static final String BASE_URL = "/encurtado.com/";
 	
 	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 	
