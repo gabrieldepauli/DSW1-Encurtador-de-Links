@@ -19,7 +19,7 @@
                 Encurtar Link
             </a><br>
 
-            <a href="/encurtado.com/loggedin/personalizar-link.jsp" class="btn btn-primary btn-lg w-100 mb-4" style="font-weight: bold;">
+            <a href="/encurtado.com/front.do?command=PageEditLinkCommand" class="btn btn-primary btn-lg w-100 mb-4" style="font-weight: bold;">
                 Personalizar Link
             </a><br>
 

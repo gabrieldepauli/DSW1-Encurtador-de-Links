@@ -15,11 +15,16 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/")
 public class RedirectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private final String BASE_URL = "http://localhost:8080/encurtado.com/";
 	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Link link = linkDao.getByURLencurtada(req.getRequestURI());
+		
+		StringBuffer urlEncurtada = req.getRequestURL().delete(0, BASE_URL.length());
+		
+		Link link = linkDao.getByURLencurtada(urlEncurtada.toString());
 		
 		if (link != null) {
 			resp.sendRedirect(link.getUrlOriginal());			

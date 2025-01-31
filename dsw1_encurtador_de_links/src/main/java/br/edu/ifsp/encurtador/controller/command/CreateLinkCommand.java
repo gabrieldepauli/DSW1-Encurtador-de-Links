@@ -17,8 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class CreateLinkCommand implements Command {
 	
-	private static final String BASE_URI = "localhost:8080";
-	private static final String BASE_URL = "/encurtado.com/";
+	private static final String BASE_URL = "localhost:8080/encurtado.com/";
 	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 	
 	@Override
@@ -26,16 +25,20 @@ public class CreateLinkCommand implements Command {
 		String urlOriginal = request.getParameter("link");
 		String identifier = request.getParameter("identifier");
 		
-		String urlEncurtada = getShortenedLink(identifier);
+		Link link = null;
 		
-		Link link = new Link(urlOriginal, urlEncurtada);
+		if (StringUtils.isBlank(identifier)) {
+			identifier = generateCode();
+		}
+
+		link = new Link(urlOriginal, identifier);
 		
 		User usuario = getLoggedUser(request);
 		
 		boolean sucess = linkDao.create(usuario, link);
 	    
 		 if (sucess) {
-		     request.setAttribute("successMessage", "Deu certo! Link encurtado: " + BASE_URI + urlEncurtada);
+		     request.setAttribute("successMessage", "Deu certo! Link encurtado: " + BASE_URL + identifier);
 		 } else {
 		     request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
 		 }
@@ -53,15 +56,6 @@ public class CreateLinkCommand implements Command {
 		}
 		
 		return null;
-	}
-	
-	private String getShortenedLink(String identifier) {
-		
-		if (identifier != null) {
-			return BASE_URL + identifier;
-		}
-		
-		return BASE_URL + generateCode();
 	}
 
     private String generateCode() {	

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="br.edu.ifsp.encurtador.model.entity.Link"%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,7 +15,7 @@
 <body class="bg-light">
 
 	<%
-		var linkId = (Integer) request.getAttribute("linkId");
+		var link = (Link) request.getAttribute("link");
 	%>
 
     <div class="container mt-5">
@@ -26,12 +28,13 @@
                     <form method="post" action="/encurtado.com/front.do">
                     	<input type="hidden" name="command" value="CreateLinkCommand">
                     	
-                    	<input type="hidden" name="id"  value="<%= linkId != null ? linkId : "" %>">
+                    	<input type="hidden" name="id"  value="<%= link != null ? link.getId() : "" %>">
                     
                         <label for="link" class="form-label">Link original</label>
 
                         <div class="input-group mb-3">
-                            <input type="url" id="link" name="link" class="form-control" placeholder="Informe o link" required>
+                            <input type="url" id="link" name="link" class="form-control" placeholder="Informe o link" 
+                            	   value="<%= link != null ? link.getUrlOriginal() : "" %>" required>
                         </div>
 
                         <label for="identifier">Identificador</label>
@@ -40,7 +43,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text opacity-75" id="basic-addon3">localhost:8080/encurtado.com/</span>
 							</div>
-							<input type="text" class="form-control" id="identifier" name="identifier" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" id="identifier" name="identifier" 
+								   value="<%= link != null ? link.getUrlEncurtada() : "" %>" aria-describedby="basic-addon3">
 						</div>
 
 						<button type="submit" class="btn btn-success w-100">Encurtar</button>

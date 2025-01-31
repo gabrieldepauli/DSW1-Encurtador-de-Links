@@ -44,9 +44,9 @@
 		                    <tr>
 		                        <td class="text-center"><%= link.getId() %></td>
 		                        <td class="text-center"><%= link.getUrlOriginal() %></td>
-		                        <td class="text-center">localhost:8080<%= link.getUrlEncurtada() %></td>
+		                        <td class="text-center">localhost:8080/encurtado.com/<%= link.getUrlEncurtada() %></td>
 		                        <td class="text-center"><a href="#" class="btn btn-info">Ver Acessos</a></td>
-		                        <td class="text-center"><a href="#">Modificar</a></td>
+		                        <td class="text-center"><a href="/encurtado.com/front.do?command=PageEditLinkCommand&id=<%= link.getId() %>"">Modificar</a></td>
 		                        <td class="text-center"><a href="/encurtado.com/front.do?command=DeleteLinkCommand&id=<%= link.getId() %>" class="btn btn-danger">Deletar</a></td>
 		                    </tr>
                 <% 
