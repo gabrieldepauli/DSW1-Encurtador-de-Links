@@ -26,7 +26,7 @@
                 <div class="card-body">
                     
                     <form method="post" action="/encurtado.com/front.do">
-                    	<input type="hidden" name="command" value="CreateLinkCommand">
+                    	<input type="hidden" name="command" value="SaveLinkCommand">
                     	
                     	<input type="hidden" name="id"  value="<%= link != null ? link.getId() : "" %>">
                     

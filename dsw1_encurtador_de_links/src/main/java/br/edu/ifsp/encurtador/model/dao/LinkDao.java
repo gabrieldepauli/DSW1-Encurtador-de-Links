@@ -17,5 +17,5 @@ public interface LinkDao {
 	
 	boolean delete(User user, Link link);
 	
-	boolean update(User user ,Link updatedLink, int id);
+	boolean update(User user, Link updatedLink);
 }

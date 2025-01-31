@@ -15,33 +15,49 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class CreateLinkCommand implements Command {
+public class SaveLinkCommand implements Command {
 	
 	private static final String BASE_URL = "localhost:8080/encurtado.com/";
 	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String idStr = request.getParameter("id");
+		
 		String urlOriginal = request.getParameter("link");
 		String identifier = request.getParameter("identifier");
+		User user = getLoggedUser(request);
 		
-		Link link = null;
+		boolean success = false;
 		
-		if (StringUtils.isBlank(identifier)) {
-			identifier = generateCode();
+		if (StringUtils.isBlank(idStr)) {
+			Link link = null;
+			
+			if (StringUtils.isBlank(identifier)) {
+				identifier = generateCode();
+			}
+			
+			link = new Link(urlOriginal, identifier);
+			
+			User usuario = getLoggedUser(request);
+			
+			success = linkDao.create(usuario, link);
 		}
-
-		link = new Link(urlOriginal, identifier);
+		else {
+			Integer id = Integer.parseInt(idStr);
+			Link link = linkDao.getByID(user, id);
+			link.setUrlOriginal(urlOriginal);
+			link.setUrlEncurtada(identifier);
+			
+			success = linkDao.update(user, link);
+		}
 		
-		User usuario = getLoggedUser(request);
-		
-		boolean sucess = linkDao.create(usuario, link);
-	    
-		 if (sucess) {
-		     request.setAttribute("successMessage", "Deu certo! Link encurtado: " + BASE_URL + identifier);
-		 } else {
-		     request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
-		 }
+		if (success) {
+			request.setAttribute("successMessage", "Deu certo! Link encurtado: " + BASE_URL + identifier);
+		} else {
+		    request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
+		}
 		
 		return  StringUtils.isNotBlank(identifier) ? 
 				"/loggedin/personalizar-link.jsp" : "/loggedin/encurtar-link.jsp";

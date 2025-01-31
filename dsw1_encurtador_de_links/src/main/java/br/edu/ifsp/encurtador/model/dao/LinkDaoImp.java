@@ -134,15 +134,15 @@ public class LinkDaoImp implements LinkDao{
 	}
 
 	@Override
-	public boolean update(User user, Link updatedLink, int id) {
-		if(updatedLink != null && id > 0) {
+	public boolean update(User user, Link updatedLink) {
+		if(updatedLink != null && updatedLink.getId() > 0) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
 					var preparedStatement = connection.prepareStatement(UPDATE)) {
 				
 				preparedStatement.setString(1, updatedLink.getUrlOriginal());
 				preparedStatement.setString(2, updatedLink.getUrlEncurtada());
-				preparedStatement.setInt(3, id);
+				preparedStatement.setInt(3, updatedLink.getId());
 				preparedStatement.setString(4, user.getEmail());
 				
 				rows = preparedStatement.executeUpdate();

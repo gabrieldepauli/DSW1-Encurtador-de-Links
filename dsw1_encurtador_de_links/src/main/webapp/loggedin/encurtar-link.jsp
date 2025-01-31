@@ -19,7 +19,7 @@
             <div class="card shadow-sm" style="width: 100%; max-width: 400px; border-radius: 12px;">
                 <div class="card-body">
                     <form action="/encurtado.com/front.do" method="POST">
-                    	<input type="hidden" name="command" value="CreateLinkCommand">
+                    	<input type="hidden" name="command" value="SaveLinkCommand">
                     
                         <div class="mb-3">
                             <label for="link" class="form-label">Link original</label>
