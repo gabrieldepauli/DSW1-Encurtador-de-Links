@@ -2,6 +2,8 @@ package br.edu.ifsp.encurtador.controller;
 
 import java.io.IOException;
 
+import org.apache.tomcat.jakartaee.commons.lang3.StringUtils;
+
 import br.edu.ifsp.encurtador.controller.command.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,7 +34,9 @@ public class FrontController extends HttpServlet {
 			
 			String page = command.execute(request, response);
 			
-			request.getRequestDispatcher(page).forward(request, response);
+			if (StringUtils.isNotBlank(page)) {				
+				request.getRequestDispatcher(page).forward(request, response);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

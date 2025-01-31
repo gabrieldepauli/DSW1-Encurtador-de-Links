@@ -23,11 +23,11 @@
                 Personalizar Link
             </a><br>
 
-            <a href="/encurtado.com/front.do?command=LinkCommand&action=getLinks" class="btn btn-info btn-lg w-100 mb-4 text-white" style="font-weight: bold;">
+            <a href="/encurtado.com/front.do?command=GetLinksCommand" class="btn btn-info btn-lg w-100 mb-4 text-white" style="font-weight: bold;">
                 Meus Links
             </a><br>
             
-            <a href="/encurtado.com/front.do?command=UserCommand&action=logout" class="btn btn-danger btn-lg w-100 mb-4" style="font-weight: bold;">
+            <a href="/encurtado.com/front.do?command=LogoutCommand" class="btn btn-danger btn-lg w-100 mb-4" style="font-weight: bold;">
                 Logout
             </a>
         </div>

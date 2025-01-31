@@ -21,8 +21,7 @@
             <div class="border p-4 shadow rounded" style="width: 350px; background-color: #f8f9fa;">
             
                 <form method="post" action="/encurtado.com/front.do">
-                	<input type="hidden" name="command" value="UserCommand">
-                	<input type="hidden" name="action" value="cadastrar">
+                	<input type="hidden" name="command" value="RegisterCommand">
                 
                     <div class="mb-3">
                         <label for="nome" class="form-label fw-bold">Nome:</label>

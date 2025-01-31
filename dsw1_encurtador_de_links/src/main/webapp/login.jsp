@@ -18,10 +18,9 @@
         
         <div class="d-flex justify-content-center mt-4">
             <div class="border p-4 shadow rounded" style="width: 350px; background-color: #f8f9fa;">
+            
                 <form method="post" action="/encurtado.com/front.do" method="POST">
-                
-                	<input type="hidden" name="command" value="UserCommand">
-                	<input type="hidden" name="action" value="login">
+                	<input type="hidden" name="command" value="LoginCommand">
                 
                     <div class="mb-3">
                         <label for="email" class="form-label fw-bold">Email:</label>
@@ -37,6 +36,7 @@
                         <button type="submit" class="btn btn-success btn-lg fw-bold">Logar</button>
                     </div>
                 </form>
+                
             </div>
         </div>
         

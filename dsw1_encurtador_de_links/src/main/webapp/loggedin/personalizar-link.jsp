@@ -24,8 +24,8 @@
                 <div class="card-body">
                     
                     <form method="post" action="/encurtado.com/front.do">
-                    	<input type="hidden" name="command" value="LinkCommand">
-                    	<input type="hidden" name="action"  value="create">
+                    	<input type="hidden" name="command" value="CreateLinkCommand">
+                    	
                     	<input type="hidden" name="id"  value="<%= linkId != null ? linkId : "" %>">
                     
                         <label for="link" class="form-label">Link original</label>
@@ -38,7 +38,7 @@
                         
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
-								<span class="input-group-text opacity-75" id="basic-addon3">encurtado.com/</span>
+								<span class="input-group-text opacity-75" id="basic-addon3">localhost:8080/encurtado.com/</span>
 							</div>
 							<input type="text" class="form-control" id="identifier" name="identifier" aria-describedby="basic-addon3">
 						</div>

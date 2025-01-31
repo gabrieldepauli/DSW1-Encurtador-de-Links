@@ -46,7 +46,7 @@
                     for (Acesso acesso : acessos) {
                 %>
                     <tr>
-                        <td class="text-center"><%= acesso.getIp_cliente()%></td>
+                        <td class="text-center"><%= acesso.getIpCliente()%></td>
                     </tr>
                 <% } %>
             </tbody>

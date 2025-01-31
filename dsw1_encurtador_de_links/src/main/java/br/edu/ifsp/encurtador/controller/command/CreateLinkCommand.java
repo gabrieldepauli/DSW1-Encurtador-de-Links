@@ -1,6 +1,6 @@
 package br.edu.ifsp.encurtador.controller.command;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -11,35 +11,17 @@ import br.edu.ifsp.encurtador.model.dao.LinkDaoFactory;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 import br.edu.ifsp.encurtador.model.enums.DaoImplementation;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class LinkCommand implements Command {
+public class CreateLinkCommand implements Command {
 	
 	private static final String BASE_URL = "/encurtado.com/";
-	
 	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
 	
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
-		String action = request.getParameter("action");
-	
-		if ("create".equals(action)) {
-			return createLink(request);
-		}
-		else if ("getLinks".equals(action)) {
-			return getUserLinks(request);
-		}
-		else if ("delete".equals(action)) {
-			return deleteLink(request);
-		}
-	
-		return null;
-	}
-	
-	private String createLink(HttpServletRequest request) {
-				
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String urlOriginal = request.getParameter("link");
 		String identifier = request.getParameter("identifier");
 		
@@ -61,41 +43,6 @@ public class LinkCommand implements Command {
 				"/loggedin/personalizar-link.jsp" : "/loggedin/encurtar-link.jsp";
 	}
 	
-	private String getUserLinks(HttpServletRequest request) {
-		var sessao = request.getSession(false);
-		
-		if (sessao != null) {
-			User user = (User) sessao.getAttribute("user_id");	
-			List<Link> links = linkDao.getAllLinks(user);
-			request.setAttribute("links", links);
-		}
-		
-		return "/loggedin/meus-links.jsp";
-	}
-	
-	private String deleteLink(HttpServletRequest request) {
-		String idString = request.getParameter("id");
-		Integer id = StringUtils.isNotBlank(idString) ? Integer.parseInt(idString) : null;
-		
-		if (id != null) {
-			var user = getLoggedUser(request);
-			
-			if (user != null) {
-				var link = linkDao.getByID(user, id);
-				boolean deletionSuccess = linkDao.delete(user, link);
-				
-				if (deletionSuccess) {
-					request.setAttribute("successMessage", "Link deletado com sucesso!");
-				}
-				else {
-					request.setAttribute("errorMessage", "Houve um problema ao deletar o link. Por favor, tente novamente.");
-				}
-			}
-		}
-		
-		return getUserLinks(request);
-	}
-	
 	private User getLoggedUser(HttpServletRequest request) {
 		var session = request.getSession(false);
 		
@@ -107,7 +54,7 @@ public class LinkCommand implements Command {
 		return null;
 	}
 	
-	public String getShortenedLink(String identifier) {
+	private String getShortenedLink(String identifier) {
 		
 		if (identifier != null) {
 			return BASE_URL + identifier;
@@ -116,7 +63,7 @@ public class LinkCommand implements Command {
 		return BASE_URL + generateCode();
 	}
 
-    public String generateCode() {	
+    private String generateCode() {	
     	Random random = new Random();
         int tamanho = 5 + random.nextInt(8);
 
