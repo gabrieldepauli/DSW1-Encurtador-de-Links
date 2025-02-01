@@ -29,6 +29,7 @@ public class SaveLinkCommand implements Command {
 		String identifier = request.getParameter("identifier");
 		User user = getLoggedUser(request);
 		
+		String originPage = request.getParameter("origin");
 		boolean success = false;
 		
 		if (StringUtils.isBlank(idStr)) {
@@ -39,9 +40,7 @@ public class SaveLinkCommand implements Command {
 			}
 			
 			link = new Link(urlOriginal, identifier);
-			
 			User usuario = getLoggedUser(request);
-			
 			success = linkDao.create(usuario, link);
 		}
 		else {
@@ -49,7 +48,6 @@ public class SaveLinkCommand implements Command {
 			Link link = linkDao.getByID(user, id);
 			link.setUrlOriginal(urlOriginal);
 			link.setUrlEncurtada(identifier);
-			
 			success = linkDao.update(user, link);
 		}
 		
@@ -59,8 +57,7 @@ public class SaveLinkCommand implements Command {
 		    request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
 		}
 		
-		return  StringUtils.isNotBlank(identifier) ? 
-				"/loggedin/personalizar-link.jsp" : "/loggedin/encurtar-link.jsp";
+		return originPage;
 	}
 	
 	private User getLoggedUser(HttpServletRequest request) {

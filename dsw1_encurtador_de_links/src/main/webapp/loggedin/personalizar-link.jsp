@@ -27,6 +27,7 @@
                     
                     <form method="post" action="/encurtado.com/front.do">
                     	<input type="hidden" name="command" value="SaveLinkCommand">
+                    	<input type="hidden" name="origin" value="/loggedin/personalizar-link.jsp">
                     	
                     	<input type="hidden" name="id"  value="<%= link != null ? link.getId() : "" %>">
                     
