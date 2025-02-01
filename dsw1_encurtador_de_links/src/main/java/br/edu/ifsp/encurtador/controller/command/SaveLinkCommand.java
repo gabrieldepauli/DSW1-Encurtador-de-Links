@@ -27,28 +27,32 @@ public class SaveLinkCommand implements Command {
 		
 		String urlOriginal = request.getParameter("link");
 		String identifier = request.getParameter("identifier");
+		boolean privateLink = request.getParameter("privateLink") != null;
 		User user = getLoggedUser(request);
+		
+		if (StringUtils.isBlank(identifier)) {
+			identifier = generateCode();
+		}
 		
 		String originPage = request.getParameter("origin");
 		boolean success = false;
 		
 		if (StringUtils.isBlank(idStr)) {
-			Link link = null;
-			
-			if (StringUtils.isBlank(identifier)) {
-				identifier = generateCode();
-			}
-			
-			link = new Link(urlOriginal, identifier);
-			User usuario = getLoggedUser(request);
-			success = linkDao.create(usuario, link);
+			Link link = new Link();
+			link.setUrlOriginal(urlOriginal);
+			link.setUrlEncurtada(identifier);
+			link.setPrivateLink(privateLink);
+			link.setCreator(user);
+			success = linkDao.create(link);
 		}
 		else {
 			Integer id = Integer.parseInt(idStr);
-			Link link = linkDao.getByID(user, id);
+			Link link = linkDao.getByID(id);
 			link.setUrlOriginal(urlOriginal);
 			link.setUrlEncurtada(identifier);
-			success = linkDao.update(user, link);
+			link.setPrivateLink(privateLink);
+			link.setCreator(user);
+			success = linkDao.update(link);
 		}
 		
 		if (success) {

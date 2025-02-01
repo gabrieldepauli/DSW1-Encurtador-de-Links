@@ -5,19 +5,10 @@ public class Link {
 	private int id;
 	private String urlOriginal;
 	private String urlEncurtada;
+	private boolean privateLink;
+	private User creator;
 	
 	public Link() {}
-
-	public Link(int id, String urlOriginal, String urlEncurtada) {
-		super();
-		this.id = id;
-		this.urlOriginal = urlOriginal;
-		this.urlEncurtada = urlEncurtada;
-	}
-	
-	public Link(String urlOriginal, String urlEncurtada) {
-		this(-1, urlOriginal, urlEncurtada);
-	}
 
 	public int getId() {
 		return id;
@@ -41,5 +32,21 @@ public class Link {
 
 	public void setUrlEncurtada(String urlEncurtada) {
 		this.urlEncurtada = urlEncurtada;
+	}
+
+	public boolean isPrivateLink() {
+		return privateLink;
+	}
+
+	public void setPrivateLink(boolean privateLink) {
+		this.privateLink = privateLink;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 }

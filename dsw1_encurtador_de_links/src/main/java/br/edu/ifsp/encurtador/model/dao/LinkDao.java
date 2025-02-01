@@ -7,15 +7,15 @@ import br.edu.ifsp.encurtador.model.entity.User;
 
 public interface LinkDao {
 	
-	boolean create(User user, Link link);
+	boolean create(Link link);
 	
-	Link getByID(User user, int id);
+	Link getByID(int id);
 	
 	Link getByURLencurtada(String urlEncurtada);
 	
 	List<Link> getAllLinks(User user);
 	
-	boolean delete(User user, Link link);
+	boolean delete(Link link);
 	
-	boolean update(User user, Link updatedLink);
+	boolean update(Link updatedLink);
 }

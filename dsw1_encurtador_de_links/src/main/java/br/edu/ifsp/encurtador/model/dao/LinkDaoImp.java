@@ -7,18 +7,21 @@ import java.util.List;
 import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
+import br.edu.ifsp.encurtador.model.enums.DaoImplementation;
 
 public class LinkDaoImp implements LinkDao{
 	
-	private static final String INSERT = "INSERT INTO link (url_original, url_encurtada, email_criador) VALUES (?, ?, ?)";
-	private static final String SELECT_BY_ID = "SELECT * FROM link WHERE id = ? AND email_criador = ?";
+	private UserDao userDao = UserDaoFactory.getInstance(DaoImplementation.MYSQL);
+	
+	private static final String INSERT = "INSERT INTO link (url_original, url_encurtada, email_criador, privado) VALUES (?, ?, ?, ?)";
+	private static final String SELECT_BY_ID = "SELECT * FROM link WHERE id = ?";
 	private static final String SELECT_BY_URL_ENCURTADA = "SELECT * FROM link WHERE url_encurtada = ?";
 	private static final String SELECT_ALL = "SELECT * FROM link WHERE email_criador = ? ORDER BY id";
-	private static final String UPDATE = "UPDATE link SET url_original = ?, url_encurtada = ? WHERE id = ? AND email_criador = ?";
+	private static final String UPDATE = "UPDATE link SET url_original = ?, url_encurtada = ?, privado = ? WHERE id = ? AND email_criador = ?";
 	private static final String DELETE = "DELETE FROM link WHERE id = ? AND email_criador = ?";
 
 	@Override
-	public boolean create(User user, Link link) {
+	public boolean create(Link link) {
 		if(link != null) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
@@ -26,11 +29,12 @@ public class LinkDaoImp implements LinkDao{
 				
 				preparedStatement.setString(1, link.getUrlOriginal());
 				preparedStatement.setString(2, link.getUrlEncurtada());
-				preparedStatement.setString(3, user.getEmail());
+				preparedStatement.setString(3, link.getCreator().getEmail());
+				preparedStatement.setBoolean(4, link.isPrivateLink());
 				rows = preparedStatement.executeUpdate();
 				
 				if (rows > 0) {
-					user.addLink(link);
+					link.getCreator().addLink(link);
 				}
 				
 			} catch (SQLException e) {
@@ -43,14 +47,13 @@ public class LinkDaoImp implements LinkDao{
 	}
 
 	@Override
-	public Link getByID(User user, int id) {
+	public Link getByID(int id) {
 		Link link = null;
 		if (id > 0) {
 			try (var connection = DatabaseConnection.getConnection();
 				 var preparedStatement = connection.prepareStatement(SELECT_BY_ID)){
 				
 				preparedStatement.setInt(1, id);
-				preparedStatement.setString(2, user.getEmail());
 
 				ResultSet result = preparedStatement.executeQuery();
 				if (result.next()) {
@@ -58,6 +61,12 @@ public class LinkDaoImp implements LinkDao{
 					link.setId(result.getInt("id"));
 					link.setUrlOriginal(result.getString("url_original"));
 					link.setUrlEncurtada(result.getString("url_encurtada"));
+					link.setPrivateLink(result.getBoolean("privado"));
+					
+					String userEmail = result.getString("email_criador");
+					var user = userDao.findByEmail(userEmail);
+					
+					link.setCreator(user);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -81,6 +90,11 @@ public class LinkDaoImp implements LinkDao{
 					link.setId(result.getInt("id"));
 					link.setUrlOriginal(result.getString("url_original"));
 					link.setUrlEncurtada(result.getString("url_encurtada"));
+					link.setPrivateLink(result.getBoolean("privado"));
+					
+					String userEmail = result.getString("email_criador");
+					User user = userDao.findByEmail(userEmail);
+					link.setCreator(user);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -104,6 +118,7 @@ public class LinkDaoImp implements LinkDao{
 				link.setId(result.getInt("id"));
 				link.setUrlOriginal(result.getString("url_original"));
 				link.setUrlEncurtada(result.getString("url_encurtada"));
+				link.setPrivateLink(result.getBoolean("privado"));
 				user.addLink(link);
 			}
 		} catch (SQLException e) {
@@ -114,14 +129,15 @@ public class LinkDaoImp implements LinkDao{
 	}
 
 	@Override
-	public boolean delete(User user, Link link) {
+	public boolean delete(Link link) {
 		if(link != null) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
 					var preparedStatement = connection.prepareStatement(DELETE)) {
 				
 				preparedStatement.setInt(1, link.getId());
-				preparedStatement.setString(2, user.getEmail());
+				preparedStatement.setString(2, link.getCreator().getEmail());
+				
 				rows = preparedStatement.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -134,7 +150,7 @@ public class LinkDaoImp implements LinkDao{
 	}
 
 	@Override
-	public boolean update(User user, Link updatedLink) {
+	public boolean update(Link updatedLink) {
 		if(updatedLink != null && updatedLink.getId() > 0) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
@@ -142,8 +158,9 @@ public class LinkDaoImp implements LinkDao{
 				
 				preparedStatement.setString(1, updatedLink.getUrlOriginal());
 				preparedStatement.setString(2, updatedLink.getUrlEncurtada());
-				preparedStatement.setInt(3, updatedLink.getId());
-				preparedStatement.setString(4, user.getEmail());
+				preparedStatement.setBoolean(3, updatedLink.isPrivateLink());
+				preparedStatement.setInt(4, updatedLink.getId());
+				preparedStatement.setString(5, updatedLink.getCreator().getEmail());
 				
 				rows = preparedStatement.executeUpdate();
 				

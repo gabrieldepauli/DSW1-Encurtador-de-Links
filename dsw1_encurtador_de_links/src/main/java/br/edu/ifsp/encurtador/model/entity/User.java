@@ -3,6 +3,7 @@ package br.edu.ifsp.encurtador.model.entity;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
@@ -64,7 +65,11 @@ public class User {
 	}
 	
 	public void addLink(Link link) {
-		links.add(new Link(link.getId(), link.getUrlOriginal(), link.getUrlEncurtada()));
+		Link linkToInsert = new Link();
+		linkToInsert.setId(link.getId());
+		linkToInsert.setUrlOriginal(link.getUrlOriginal());
+		linkToInsert.setUrlEncurtada(link.getUrlEncurtada());
+		links.add(linkToInsert);
 	}
 	
 	private void init(String nome, String email, String senhaHash) {

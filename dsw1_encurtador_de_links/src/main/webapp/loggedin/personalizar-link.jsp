@@ -47,6 +47,11 @@
 							<input type="text" class="form-control" id="identifier" name="identifier" 
 								   value="<%= link != null ? link.getUrlEncurtada() : "" %>" aria-describedby="basic-addon3">
 						</div>
+						
+						<div class="form-check form-switch mb-3">
+						  	<input class="form-check-input" type="checkbox" role="switch" id="switchPrivateLink" name="privateLink" <%= link != null && link.isPrivateLink() ? "checked" : "" %>>
+						  	<label class="form-check-label" for="switchPrivateLink">Gerar link privado</label>
+						</div>
 
 						<button type="submit" class="btn btn-success w-100">Encurtar</button>
                     </form>

@@ -1,6 +1,7 @@
 package br.edu.ifsp.encurtador.controller.command;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import org.apache.tomcat.jakartaee.commons.lang3.StringUtils;
 
@@ -23,8 +24,11 @@ public class PageEditLinkCommand implements Command {
 		if (StringUtils.isNotBlank(idStr)) {
 			Integer id = Integer.parseInt(idStr);
 			User user = getLoggedUser(request);
-			Link link = linkDao.getByID(user, id);
-			request.setAttribute("link", link);
+			Link link = linkDao.getByID(id);
+			
+			if (Objects.equals(link.getCreator().getEmail(), user.getEmail())) {				
+				request.setAttribute("link", link);
+			}
 		}
 		
 		return "/loggedin/personalizar-link.jsp";

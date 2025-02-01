@@ -1,6 +1,7 @@
 package br.edu.ifsp.encurtador.controller.command;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import org.apache.tomcat.jakartaee.commons.lang3.StringUtils;
 
@@ -25,15 +26,19 @@ public class DeleteLinkCommand implements Command {
 			var user = getLoggedUser(request);
 			
 			if (user != null) {
-				var link = linkDao.getByID(user, id);
-				boolean deletionSuccess = linkDao.delete(user, link);
+				var link = linkDao.getByID(id);
 				
-				if (deletionSuccess) {
-					request.setAttribute("successMessage", "Link deletado com sucesso!");
+				if (Objects.equals(user.getEmail(), link.getCreator().getEmail())) {					
+					boolean deletionSuccess = linkDao.delete(link);
+					
+					if (deletionSuccess) {
+						request.setAttribute("successMessage", "Link deletado com sucesso!");
+					}
+					else {
+						request.setAttribute("errorMessage", "Houve um problema ao deletar o link. Por favor, tente novamente.");
+					}
 				}
-				else {
-					request.setAttribute("errorMessage", "Houve um problema ao deletar o link. Por favor, tente novamente.");
-				}
+				
 			}
 		}
 		
