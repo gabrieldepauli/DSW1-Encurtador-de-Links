@@ -12,6 +12,7 @@ CREATE TABLE link (
     url_original TEXT NOT NULL,
     url_encurtada VARCHAR(40) NOT NULL UNIQUE,
     email_criador VARCHAR(128),
+    privado BOOLEAN NOT NULL DEFAULT(FALSE),
     FOREIGN KEY (email_criador) REFERENCES usuario(email)
 );
 
@@ -21,4 +22,6 @@ CREATE TABLE acessos (
     ip_cliente VARCHAR(100) NOT NULL,
     FOREIGN KEY (url_id) REFERENCES link(id) ON DELETE CASCADE
 );
+
+SELECT * FROM usuario;
 
