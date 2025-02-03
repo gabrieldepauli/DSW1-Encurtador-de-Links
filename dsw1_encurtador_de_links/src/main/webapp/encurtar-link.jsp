@@ -12,6 +12,10 @@
 </head>
 <body class="bg-light">
 
+	<%
+		var loggedin = request.getAttribute("loggedin") != null && (boolean) request.getAttribute("loggedin");
+	%>
+
     <div class="container mt-5">
         <h1 class="text-center mb-4">Encurtar Link</h1>
 
@@ -20,7 +24,7 @@
                 <div class="card-body">
                     <form action="/encurtado.com/front.do" method="POST">
                     	<input type="hidden" name="command" value="SaveLinkCommand">
-                    	<input type="hidden" name="origin" value="/loggedin/encurtar-link.jsp">
+                    	<input type="hidden" name="origin" value="/encurtar-link.jsp">
                     
                         <div class="mb-3">
                             <label for="link" class="form-label">Link original</label>
@@ -36,7 +40,7 @@
         <%@ include file="/includes/messages.jsp" %>
 
         <div class="text-center mt-4">
-            <a href="/encurtado.com/loggedin/logged.jsp" class="btn btn-danger">Voltar</a>
+            <a href=<%= loggedin ? "/encurtado.com/front.do?command=PageHomeCommand" : "/encurtado.com/front.do?command=PageIndexCommand" %> class="btn btn-danger">Voltar</a>
         </div>
     </div>
 

@@ -15,15 +15,21 @@
         <h1 class="text-center text-dark">Página Inicial</h1>
         <div class="d-flex justify-content-center mt-4">
             <div class="border p-4 shadow rounded" style="width: 350px; background-color: #f8f9fa;">
+                
                 <h3 class="text-center mb-4">Deseja logar no sistema?</h3>
                 
+                <a href="/encurtado.com/front.do?command=PageShortenLinkCommand" class="btn btn-success btn-lg w-100 mb-4" style="font-weight: bold;">
+    	            Encurtar Link
+	            </a><br>
+
                 <a href="/encurtado.com/login.jsp" class="btn btn-success btn-lg d-block mb-4 text-center">Log In</a>
-                
+                                
                 <div class="text-center mb-2">
                     <span class="text-dark fw-bold">Ainda não tem uma conta?</span>
                 </div>
                 
                 <a href="/encurtado.com/cadastro.jsp" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
+            
             </div>
         </div>
     </div>

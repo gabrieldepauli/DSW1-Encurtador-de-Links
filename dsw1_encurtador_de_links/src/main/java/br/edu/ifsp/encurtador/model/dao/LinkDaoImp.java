@@ -29,12 +29,15 @@ public class LinkDaoImp implements LinkDao{
 				
 				preparedStatement.setString(1, link.getUrlOriginal());
 				preparedStatement.setString(2, link.getUrlEncurtada());
-				preparedStatement.setString(3, link.getCreator().getEmail());
+				
+				var creator = link.getCreator();
+				
+				preparedStatement.setString(3, creator != null ? creator.getEmail() : null);
 				preparedStatement.setBoolean(4, link.isPrivateLink());
 				rows = preparedStatement.executeUpdate();
 				
-				if (rows > 0) {
-					link.getCreator().addLink(link);
+				if (rows > 0 && creator != null) {
+					creator.addLink(link);
 				}
 				
 			} catch (SQLException e) {

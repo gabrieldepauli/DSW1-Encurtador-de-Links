@@ -15,7 +15,7 @@
 
         <div class="border p-4 shadow-lg rounded mt-4" style="background-color: #f8f9fa; max-width: 500px; margin: 0 auto;">
 
-            <a href="/encurtado.com/loggedin/encurtar-link.jsp" class="btn btn-success btn-lg w-100 mb-4" style="font-weight: bold;">
+            <a href="/encurtado.com/front.do?command=PageShortenLinkCommand" class="btn btn-success btn-lg w-100 mb-4" style="font-weight: bold;">
                 Encurtar Link
             </a><br>
 
