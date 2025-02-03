@@ -13,7 +13,7 @@ O projeto do encurtador de links foi criado pelos alunos do curso de Análise e 
 ### Tecnologias utilizadas 👩‍💻
 
 - **JSP:** Utilizado na criação das páginas usadas no projeto.
-- **Java:** Principal linguagem de programação utilizada, necessária para a criação de toda a lógica das funções do programa.
+- **Java:** Principal linguagem de programação utilizada, necessária para a criação de toda a lógica das funções do programa. **OBS: O aplicativo está configurado para rodar nas versões Java 18+.**
 - **Servlet:** Utilizado nos FrontControllers.
 - **Command:** Utilizado para efetuar a execução da lógica de controle.
 - **Session:** Utilizado para criar a sessão do usuário.
