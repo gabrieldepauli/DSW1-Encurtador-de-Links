@@ -52,7 +52,15 @@ Para que o sistema funcione corretamente foram adicionadas algumas funções, ir
 
 ## Tutorial de Instalação
 
+Para que o aplicativo funcione corretamente, siga os passos abaixo:
 
+- Baixe e instale o "Eclipse".
+- Instale e configure o Tomcat em sua máquina. 
+- Clone o repositório do Github no seu aplicativo "Eclipse" com Tomcat configurado como Server.
+- Certifique-se que o seu Java está na versão 18+ (versões 18 para cima).
+- Abra o MySql e crie o Banco de Dados com a base que está inclusa dentro da pasta “scripts_sql” no Github.
+- Configure a conexão com o seu Banco de Dados dentro da Classe "DatabaseConnection" que se localiza na pasta "Connection", alterando o URL, o nome de usuário e a senha já definidos dentro da classe para sua URL, nome de usuário e senha pessoais configurados em seu MySQL.
+- Por último, configure o "context.xml", alterando o URL, o nome de usuário e a senha para os configurados em seu MySQL
 
 ## Screenshots do Sistema em funcionamento 📷
 
