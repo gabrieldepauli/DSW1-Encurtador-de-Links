@@ -22,13 +22,13 @@
     	            Encurtar Link
 	            </a><br>
 
-                <a href="/encurtado.com/login.jsp" class="btn btn-success btn-lg d-block mb-4 text-center">Log In</a>
+                <a href="/encurtado.com/front.do?command=PageLoginCommand" class="btn btn-success btn-lg d-block mb-4 text-center">Log In</a>
                                 
                 <div class="text-center mb-2">
                     <span class="text-dark fw-bold">Ainda não tem uma conta?</span>
                 </div>
                 
-                <a href="/encurtado.com/cadastro.jsp" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
+                <a href="/encurtado.com/front.do?command=PageRegisterCommand" class="btn btn-primary btn-lg d-block text-center">Cadastrar</a>
             
             </div>
         </div>

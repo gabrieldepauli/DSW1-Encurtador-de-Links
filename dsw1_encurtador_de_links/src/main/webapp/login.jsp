@@ -41,11 +41,11 @@
         </div>
         
         <div class="text-center mt-4">
-            <a href="index.jsp" class="btn btn-danger fw-bold">Voltar</a>
+            <a href="/encurtado.com/front.do?command=PageIndexCommand" class="btn btn-danger fw-bold">Voltar</a>
         </div>
         
         <div class="text-center mt-4">
-            <p class="text-dark fw-bold">Não possui cadastro? <a href="/encurtado.com/cadastro.jsp" class="text-primary fw-bold">Cadastre-se</a></p>
+            <p class="text-dark fw-bold">Não possui cadastro? <a href="/encurtado.com/front.do?command=PageRegisterCommand" class="text-primary fw-bold">Cadastre-se</a></p>
         </div>
     </div>
 </body>

@@ -66,7 +66,7 @@
         </table>
 
         <div class="text-center mt-4">
-            <a href="/encurtado.com/loggedin/logged.jsp" class="btn btn-danger">Voltar</a>
+            <a href="/encurtado.com/front.do?command=PageHomeCommand" class="btn btn-danger">Voltar</a>
         </div>
     </div>
 </body>
