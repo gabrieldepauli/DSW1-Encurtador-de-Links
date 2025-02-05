@@ -14,7 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class PageEditLinkCommand implements Command {
+public class PageEditLinkCommand extends CommandAuthenticator implements Command {
 	private final LinkDao linkDao;
 	
 	public PageEditLinkCommand() {
@@ -23,19 +23,26 @@ public class PageEditLinkCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idStr = request.getParameter("id");
-		
-		if (StringUtils.isNotBlank(idStr)) {
-			Integer id = Integer.parseInt(idStr);
-			User user = getLoggedUser(request);
-			Link link = linkDao.getByID(id);
+		try {
+			super.checkSession(request);
+			String idStr = request.getParameter("id");
 			
-			if (Objects.equals(link.getEmailCreator(), user.getEmail())) {				
-				request.setAttribute("link", link);
+			if (StringUtils.isNotBlank(idStr)) {
+				Integer id = Integer.parseInt(idStr);
+				User user = getLoggedUser(request);
+				Link link = linkDao.getByID(id);
+				
+				if (Objects.equals(link.getEmailCreator(), user.getEmail())) {				
+					request.setAttribute("link", link);
+				}
 			}
+			
+			return "/loggedin/personalizar-link.jsp";			
 		}
-		
-		return "/loggedin/personalizar-link.jsp";
+		catch(IllegalAccessException e) {
+			System.err.println("Acesso negado");
+			return "errors/404.jsp";
+		}
 	}
 	
 	private User getLoggedUser(HttpServletRequest request) {

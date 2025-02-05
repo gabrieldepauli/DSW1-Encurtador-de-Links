@@ -12,7 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class GetLinksCommand implements Command {
+public class GetLinksCommand extends CommandAuthenticator implements Command {
 	
 	private final LinkDao linkDao;
 	
@@ -22,14 +22,21 @@ public class GetLinksCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		var sessao = request.getSession(false);
-		
-		if (sessao != null) {
-			User user = (User) sessao.getAttribute("user_id");	
-			List<Link> links = linkDao.getAllLinks(user);
-			request.setAttribute("links", links);
+		try {
+			super.checkSession(request);
+			var sessao = request.getSession(false);
+			
+			if (sessao != null) {
+				User user = (User) sessao.getAttribute("user_id");	
+				List<Link> links = linkDao.getAllLinks(user);
+				request.setAttribute("links", links);
+			}
+			
+			return "/loggedin/meus-links.jsp";			
 		}
-		
-		return "/loggedin/meus-links.jsp";
+		catch(IllegalAccessException e) {
+			System.err.println("Acesso negado");
+			return "errors/404.jsp";
+		}
 	}
 }
