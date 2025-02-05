@@ -15,7 +15,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class DeleteLinkCommand implements Command {
 	
-	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
+	private final LinkDao linkDao;
+	
+	public DeleteLinkCommand() {
+		this.linkDao = new LinkDaoFactory().getInstance(DaoImplementation.MYSQL);
+	}
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +32,7 @@ public class DeleteLinkCommand implements Command {
 			if (user != null) {
 				var link = linkDao.getByID(id);
 				
-				if (Objects.equals(user.getEmail(), link.getCreator().getEmail())) {					
+				if (Objects.equals(user.getEmail(), link.getEmailCreator())) {					
 					boolean deletionSuccess = linkDao.delete(link);
 					
 					if (deletionSuccess) {

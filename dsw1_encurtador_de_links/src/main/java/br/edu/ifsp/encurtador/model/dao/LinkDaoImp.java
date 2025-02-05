@@ -7,11 +7,8 @@ import java.util.List;
 import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
-import br.edu.ifsp.encurtador.model.enums.DaoImplementation;
 
 public class LinkDaoImp implements LinkDao{
-	
-	private UserDao userDao = UserDaoFactory.getInstance(DaoImplementation.MYSQL);
 	
 	private static final String INSERT = "INSERT INTO link (url_original, url_encurtada, email_criador, privado) VALUES (?, ?, ?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM link WHERE id = ?";
@@ -28,17 +25,10 @@ public class LinkDaoImp implements LinkDao{
 				var preparedStatement = connection.prepareStatement(INSERT)) {
 				
 				preparedStatement.setString(1, link.getUrlOriginal());
-				preparedStatement.setString(2, link.getUrlEncurtada());
-				
-				var creator = link.getCreator();
-				
-				preparedStatement.setString(3, creator != null ? creator.getEmail() : null);
+				preparedStatement.setString(2, link.getUrlEncurtada());				
+				preparedStatement.setString(3, link.getEmailCreator());
 				preparedStatement.setBoolean(4, link.isPrivateLink());
 				rows = preparedStatement.executeUpdate();
-				
-				if (rows > 0 && creator != null) {
-					creator.addLink(link);
-				}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -65,11 +55,9 @@ public class LinkDaoImp implements LinkDao{
 					link.setUrlOriginal(result.getString("url_original"));
 					link.setUrlEncurtada(result.getString("url_encurtada"));
 					link.setPrivateLink(result.getBoolean("privado"));
+					link.setEmailCreator(result.getString("email_criador"));
 					
-					String userEmail = result.getString("email_criador");
-					var user = userDao.findByEmail(userEmail);
 					
-					link.setCreator(user);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -94,10 +82,7 @@ public class LinkDaoImp implements LinkDao{
 					link.setUrlOriginal(result.getString("url_original"));
 					link.setUrlEncurtada(result.getString("url_encurtada"));
 					link.setPrivateLink(result.getBoolean("privado"));
-					
-					String userEmail = result.getString("email_criador");
-					User user = userDao.findByEmail(userEmail);
-					link.setCreator(user);
+					link.setEmailCreator(result.getString("email_criador"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -139,7 +124,7 @@ public class LinkDaoImp implements LinkDao{
 					var preparedStatement = connection.prepareStatement(DELETE)) {
 				
 				preparedStatement.setInt(1, link.getId());
-				preparedStatement.setString(2, link.getCreator().getEmail());
+				preparedStatement.setString(2, link.getEmailCreator());
 				
 				rows = preparedStatement.executeUpdate();
 				
@@ -163,7 +148,7 @@ public class LinkDaoImp implements LinkDao{
 				preparedStatement.setString(2, updatedLink.getUrlEncurtada());
 				preparedStatement.setBoolean(3, updatedLink.isPrivateLink());
 				preparedStatement.setInt(4, updatedLink.getId());
-				preparedStatement.setString(5, updatedLink.getCreator().getEmail());
+				preparedStatement.setString(5, updatedLink.getEmailCreator());
 				
 				rows = preparedStatement.executeUpdate();
 				

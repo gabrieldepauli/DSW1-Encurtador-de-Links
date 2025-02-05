@@ -2,9 +2,9 @@ package br.edu.ifsp.encurtador.model.dao;
 
 import br.edu.ifsp.encurtador.model.entity.User;
 
-public interface  UserDao {
+public interface  UserDao extends BasicDao<User> {
 	
-	boolean insert(User user);
+	boolean create(User user);
 	
 	User findByEmail(String email); 
 

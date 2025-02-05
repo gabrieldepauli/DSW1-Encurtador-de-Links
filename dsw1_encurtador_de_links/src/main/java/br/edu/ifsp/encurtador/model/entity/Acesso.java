@@ -2,23 +2,26 @@ package br.edu.ifsp.encurtador.model.entity;
 
 public class Acesso {
 	
-	private int id;
+	private Integer id;
+	private Integer linkId;
 	private String ipCliente;
 	
 	public Acesso() {}
-	
-	public Acesso(int id, String ipCliente) {
-		super();
-		this.id = id;
-		this.ipCliente = ipCliente;
-	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getLinkId() {
+		return linkId;
+	}
+
+	public void setLinkId(Integer linkId) {
+		this.linkId = linkId;
 	}
 
 	public String getIpCliente() {

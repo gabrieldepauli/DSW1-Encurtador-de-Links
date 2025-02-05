@@ -18,7 +18,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SaveLinkCommand implements Command {
 	
 	private static final String BASE_URL = "localhost:8080/encurtado.com/";
-	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
+	private final LinkDao linkDao;
+	
+	public SaveLinkCommand() {
+		this.linkDao = new LinkDaoFactory().getInstance(DaoImplementation.MYSQL);
+	}
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,7 +46,7 @@ public class SaveLinkCommand implements Command {
 			link.setUrlOriginal(urlOriginal);
 			link.setUrlEncurtada(identifier);
 			link.setPrivateLink(privateLink);
-			link.setCreator(user);
+			link.setEmailCreator(user != null ? user.getEmail() : null);
 			success = linkDao.create(link);
 		}
 		else {
@@ -51,7 +55,7 @@ public class SaveLinkCommand implements Command {
 			link.setUrlOriginal(urlOriginal);
 			link.setUrlEncurtada(identifier);
 			link.setPrivateLink(privateLink);
-			link.setCreator(user);
+			link.setEmailCreator(user.getEmail());
 			success = linkDao.update(link);
 		}
 		

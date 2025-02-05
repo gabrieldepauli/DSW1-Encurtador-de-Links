@@ -5,9 +5,9 @@ import java.util.List;
 import br.edu.ifsp.encurtador.model.entity.Acesso;
 import br.edu.ifsp.encurtador.model.entity.Link;
 
-public interface AcessoDao {
+public interface AcessoDao extends BasicDao<Acesso> {
 	
-	boolean create(Link link, Acesso acesso);
+	boolean create(Acesso acesso);
 	
 	Acesso getByID(int id);
 	

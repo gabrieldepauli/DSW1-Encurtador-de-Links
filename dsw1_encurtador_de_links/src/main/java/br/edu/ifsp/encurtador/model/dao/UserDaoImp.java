@@ -11,7 +11,7 @@ public class UserDaoImp implements UserDao {
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM usuario WHERE email = ?";
 	
 	@Override
-	public boolean insert(User user) {
+	public boolean create(User user) {
 		int rows = 0;
 		
 		if(user != null) {

@@ -5,7 +5,7 @@ import java.util.List;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 
-public interface LinkDao {
+public interface LinkDao extends BasicDao<Link> {
 	
 	boolean create(Link link);
 	

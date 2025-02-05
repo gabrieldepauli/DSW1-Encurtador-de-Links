@@ -9,7 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class LoginCommand implements Command {
 	
-	private final UserDao userDao = UserDaoFactory.getInstance(DaoImplementation.MYSQL);
+	private final UserDao userDao;
+	
+	public LoginCommand() {
+		this.userDao = new UserDaoFactory().getInstance(DaoImplementation.MYSQL);
+	}
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {

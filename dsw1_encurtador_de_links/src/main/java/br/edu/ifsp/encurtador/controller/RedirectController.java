@@ -19,7 +19,11 @@ public class RedirectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final String BASE_URL = "http://localhost:8080/encurtado.com/";
-	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
+	private final LinkDao linkDao;
+	
+	public RedirectController() {
+		this.linkDao = new LinkDaoFactory().getInstance(DaoImplementation.MYSQL);
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +36,7 @@ public class RedirectController extends HttpServlet {
 			if (link.isPrivateLink()) {
 				var user = getLoggedUser(req);
 
-				if (user != null && Objects.equals(user.getEmail(), link.getCreator().getEmail())) {
+				if (user != null && Objects.equals(user.getEmail(), link.getEmailCreator())) {
 					resp.sendRedirect(link.getUrlOriginal());
 				}
 				else {

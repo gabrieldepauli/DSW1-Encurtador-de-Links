@@ -9,20 +9,20 @@ import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Acesso;
 import br.edu.ifsp.encurtador.model.entity.Link;
 
-public class AcessoDaoImp implements AcessoDao{
+public class AcessoDaoImp implements AcessoDao {
 	
 	private static final String INSERT = "INSERT INTO acessos (url_id, ip_cliente) VALUES (?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM acessos WHERE id = ?";
 	private static final String SELECT_ALL = "SELECT * FROM acessos WHERE url_id = ? ORDER BY id";
 
 	@Override
-	public boolean create(Link link, Acesso acesso) {
+	public boolean create(Acesso acesso) {
 		if(acesso != null) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
 					var preparedStatement = connection.prepareStatement(INSERT)) {
 				
-				preparedStatement.setInt(1, link.getId());
+				preparedStatement.setInt(1, acesso.getLinkId());
 				preparedStatement.setString(2, acesso.getIpCliente());
 				rows = preparedStatement.executeUpdate();
 				
@@ -47,7 +47,7 @@ public class AcessoDaoImp implements AcessoDao{
 				ResultSet result = preparedStatement.executeQuery();
 				if (result.next()) {
 					acesso = new Acesso();
-					acesso.setId(result.getInt("id"));
+					acesso.setLinkId(result.getInt("id"));
 					acesso.setIpCliente(result.getString("ip_cliente"));
 				}
 			} catch (SQLException e) {
@@ -70,6 +70,7 @@ public class AcessoDaoImp implements AcessoDao{
 				while (result.next()) {
 					var acesso = new Acesso();
 					acesso.setId(result.getInt("id"));
+					acesso.setLinkId(result.getInt("url_id"));
 					acesso.setIpCliente(result.getString("ip_cliente"));
 					acessos.add(acesso);
 				}

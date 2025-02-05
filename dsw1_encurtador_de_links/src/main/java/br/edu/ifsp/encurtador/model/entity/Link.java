@@ -6,7 +6,7 @@ public class Link {
 	private String urlOriginal;
 	private String urlEncurtada;
 	private boolean privateLink;
-	private User creator;
+	private String emailCreator;
 	
 	public Link() {}
 
@@ -42,11 +42,11 @@ public class Link {
 		this.privateLink = privateLink;
 	}
 
-	public User getCreator() {
-		return creator;
+	public String getEmailCreator() {
+		return emailCreator;
 	}
 
-	public void setCreator(User creator) {
-		this.creator = creator;
+	public void setEmailCreator(String emailCreator) {
+		this.emailCreator = emailCreator;
 	}
 }

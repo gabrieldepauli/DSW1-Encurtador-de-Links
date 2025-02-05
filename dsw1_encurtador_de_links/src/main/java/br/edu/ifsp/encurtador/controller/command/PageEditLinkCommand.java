@@ -15,7 +15,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class PageEditLinkCommand implements Command {
-	private final LinkDao linkDao = LinkDaoFactory.getInstance(DaoImplementation.MYSQL);
+	private final LinkDao linkDao;
+	
+	public PageEditLinkCommand() {
+		this.linkDao = new LinkDaoFactory().getInstance(DaoImplementation.MYSQL);
+	}
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +30,7 @@ public class PageEditLinkCommand implements Command {
 			User user = getLoggedUser(request);
 			Link link = linkDao.getByID(id);
 			
-			if (Objects.equals(link.getCreator().getEmail(), user.getEmail())) {				
+			if (Objects.equals(link.getEmailCreator(), user.getEmail())) {				
 				request.setAttribute("link", link);
 			}
 		}
