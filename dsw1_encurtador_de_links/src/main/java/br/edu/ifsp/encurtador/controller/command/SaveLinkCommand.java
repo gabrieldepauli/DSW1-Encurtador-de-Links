@@ -65,7 +65,9 @@ public class SaveLinkCommand implements Command {
 		    request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
 		}
 		
-		return originPage;
+		request.setAttribute("loggedin", getLoggedUser(request) != null);
+		
+		return "/encurtar-link.jsp";
 	}
 	
 	private User getLoggedUser(HttpServletRequest request) {
