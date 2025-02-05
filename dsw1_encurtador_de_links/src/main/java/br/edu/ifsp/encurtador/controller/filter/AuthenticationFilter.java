@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = { "/logged.do", "/loggedin/*" } )
+@WebFilter(urlPatterns = "/loggedin/*" )
 public class AuthenticationFilter implements Filter {
 
 	@Override
@@ -23,10 +23,8 @@ public class AuthenticationFilter implements Filter {
 		
 		if (session != null && session.getAttribute("user_id") != null) {
 			chain.doFilter(request, response);
-		} else {
-			request.setAttribute("message", "Acesso permitido apenas para usuário logado.");
-			
-			var dispatcher = request.getRequestDispatcher("front.do?action=loginForm");
+		} else {			
+			var dispatcher = request.getRequestDispatcher("/errors/404.jsp");
 			dispatcher.forward(request, response);
 		}	
 		

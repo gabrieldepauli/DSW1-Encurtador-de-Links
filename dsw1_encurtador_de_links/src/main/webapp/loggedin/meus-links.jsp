@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.Link" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/images/logoEncurtador.png">
+    <link rel="icon" type="image/png"  href="<%= request.getContextPath() %>/images/logoEncurtador.png">
 </head>
 <body>
     <div class="container mt-5">
@@ -44,7 +45,17 @@
 		                    <tr>
 		                        <td class="text-center"><%= link.getId() %></td>
 		                        <td class="text-center"><%= link.getUrlOriginal() %></td>
-		                        <td class="text-center">localhost:8080/encurtado.com/<%= link.getUrlEncurtada() %></td>
+		                        <td class="text-center">	                        	
+		                        	<% if (link.isPrivateLink() == true) { %>
+		                        		<span title="This link is private" class="text-center">		                        		
+		                        			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+											  <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"/>
+											</svg>
+		                        		</span>
+		                        	<% } %>
+		                        	
+		                        	localhost:8080/encurtado.com/<%= link.getUrlEncurtada() %>
+		                        </td>
 		                        <td class="text-center"><a href="#" class="btn btn-info">Ver Acessos</a></td>
 		                        <td class="text-center"><a href="/encurtado.com/front.do?command=PageEditLinkCommand&id=<%= link.getId() %>"">Modificar</a></td>
 		                        <td class="text-center"><a href="/encurtado.com/front.do?command=DeleteLinkCommand&id=<%= link.getId() %>" class="btn btn-danger">Deletar</a></td>

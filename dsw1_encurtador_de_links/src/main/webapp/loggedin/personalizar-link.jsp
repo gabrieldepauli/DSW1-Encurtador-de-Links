@@ -50,10 +50,10 @@
 						
 						<div class="form-check form-switch mb-3">
 						  	<input class="form-check-input" type="checkbox" role="switch" id="switchPrivateLink" name="privateLink" <%= link != null && link.isPrivateLink() ? "checked" : "" %>>
-						  	<label class="form-check-label" for="switchPrivateLink">Gerar link privado</label>
+						  	<label class="form-check-label" for="switchPrivateLink">Link privado</label>
 						</div>
 
-						<button type="submit" class="btn btn-success w-100">Encurtar</button>
+						<button type="submit" class="btn btn-success w-100">Salvar</button>
                     </form>
                 </div>
             </div>

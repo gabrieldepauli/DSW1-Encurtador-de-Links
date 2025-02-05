@@ -69,6 +69,7 @@ public class User {
 		linkToInsert.setId(link.getId());
 		linkToInsert.setUrlOriginal(link.getUrlOriginal());
 		linkToInsert.setUrlEncurtada(link.getUrlEncurtada());
+		linkToInsert.setPrivateLink(link.isPrivateLink());
 		links.add(linkToInsert);
 	}
 	
