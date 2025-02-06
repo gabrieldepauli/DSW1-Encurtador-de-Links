@@ -1,6 +1,7 @@
 package br.edu.ifsp.encurtador.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -34,33 +35,36 @@ public class RedirectController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		StringBuffer urlEncurtada = req.getRequestURL().delete(0, BASE_URL.length());
 		
 		Link link = linkDao.getByURLencurtada(urlEncurtada.toString());
 		
 		if (link != null) {
-			if (link.isPrivateLink()) {
-				var user = getLoggedUser(req);
-
-				if (user != null && Objects.equals(user.getEmail(), link.getEmailCreator())) {
-					resp.sendRedirect(link.getUrlOriginal());
+			try {
+				String ipAddress = req.getRemoteAddr();
+				Acesso acesso = new Acesso();
+				acesso.setLinkId(link.getId());
+				acesso.setIpCliente(ipAddress);
+				acesso.setDataHoraAcesso(LocalDateTime.now());
+				acessoDao.create(acesso);
+				
+				if (link.isPrivateLink()) {
+					var user = getLoggedUser(req);
+					
+					if (user != null && Objects.equals(user.getEmail(), link.getEmailCreator())) {
+						resp.sendRedirect(link.getUrlOriginal());
+					}
+					else {
+						req.getRequestDispatcher("/errors/404.jsp").forward(req, resp);
+					}
 				}
-				else {
-					req.getRequestDispatcher("/errors/404.jsp").forward(req, resp);
+				else {	
+					resp.sendRedirect(link.getUrlOriginal());			
 				}
 			}
-			else {	
-				resp.sendRedirect(link.getUrlOriginal());			
+			catch(SQLException e) {
+				req.getRequestDispatcher("/errors/500.jsp").forward(req, resp);
 			}
-			
-			String ipAddress = req.getRemoteAddr();
-
-			Acesso acesso = new Acesso();
-			acesso.setLinkId(link.getId());
-			acesso.setIpCliente(ipAddress);
-			acesso.setDataHoraAcesso(LocalDateTime.now());
-			acessoDao.create(acesso);
 		}
 		else {
 			req.getRequestDispatcher("/errors/404.jsp").forward(req, resp);

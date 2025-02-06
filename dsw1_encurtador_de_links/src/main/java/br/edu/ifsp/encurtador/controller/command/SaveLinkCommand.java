@@ -1,6 +1,7 @@
 package br.edu.ifsp.encurtador.controller.command;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -26,47 +27,53 @@ public class SaveLinkCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String idStr = request.getParameter("id");
-		
-		String urlOriginal = request.getParameter("link");
-		String identifier = request.getParameter("identifier");
-		boolean privateLink = request.getParameter("privateLink") != null;
-		User user = getLoggedUser(request);
-		
-		if (StringUtils.isBlank(identifier)) {
-			identifier = generateCode();
+		try {
+			String idStr = request.getParameter("id");
+			
+			String urlOriginal = request.getParameter("link");
+			String identifier = request.getParameter("identifier");
+			boolean privateLink = request.getParameter("privateLink") != null;
+			User user = getLoggedUser(request);
+			
+			if (StringUtils.isBlank(identifier)) {
+				do {
+					identifier = generateCode();
+				}
+				while (linkDao.getByURLencurtada(identifier) != null);
+			}
+			
+			boolean success = false;
+			
+			if (StringUtils.isBlank(idStr)) {
+				Link link = new Link();
+				link.setUrlOriginal(urlOriginal);
+				link.setUrlEncurtada(identifier);
+				link.setPrivateLink(privateLink);
+				link.setEmailCreator(user != null ? user.getEmail() : null);
+				success = linkDao.create(link);
+			}
+			else {
+				Integer id = Integer.parseInt(idStr);
+				Link link = linkDao.getByID(id);
+				link.setUrlOriginal(urlOriginal);
+				link.setUrlEncurtada(identifier);
+				link.setPrivateLink(privateLink);
+				link.setEmailCreator(user.getEmail());
+				success = linkDao.update(link);
+			}
+			
+			if (success) {
+				request.setAttribute("successMessage", "Deu certo! Link encurtado: " + BASE_URL + identifier);
+			} else {
+				request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
+			}
+		}
+		catch(SQLException e) {
+			request.setAttribute("errorMessage", e.getMessage());
 		}
 		
 		String originPage = request.getParameter("origin");
-		boolean success = false;
-		
-		if (StringUtils.isBlank(idStr)) {
-			Link link = new Link();
-			link.setUrlOriginal(urlOriginal);
-			link.setUrlEncurtada(identifier);
-			link.setPrivateLink(privateLink);
-			link.setEmailCreator(user != null ? user.getEmail() : null);
-			success = linkDao.create(link);
-		}
-		else {
-			Integer id = Integer.parseInt(idStr);
-			Link link = linkDao.getByID(id);
-			link.setUrlOriginal(urlOriginal);
-			link.setUrlEncurtada(identifier);
-			link.setPrivateLink(privateLink);
-			link.setEmailCreator(user.getEmail());
-			success = linkDao.update(link);
-		}
-		
-		if (success) {
-			request.setAttribute("successMessage", "Deu certo! Link encurtado: " + BASE_URL + identifier);
-		} else {
-		    request.setAttribute("errorMessage", "Erro ao encurtar o link. Por favor, tente novamente.");
-		}
-		
-		request.setAttribute("loggedin", getLoggedUser(request) != null);
-		
+		request.setAttribute("loggedin", getLoggedUser(request) != null);	
 		return originPage;
 	}
 	

@@ -1,6 +1,7 @@
 package br.edu.ifsp.encurtador.controller.command;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import br.edu.ifsp.encurtador.model.dao.UserDao;
 import br.edu.ifsp.encurtador.model.dao.UserDaoFactory;
@@ -20,19 +21,24 @@ public class RegisterCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		var nome = request.getParameter("nome");
-		var email = request.getParameter("email");
-		var senha = request.getParameter("senha");		
-		User user = new User(nome, email, senha);
-		
-		boolean cadastrado = userDao.create(user);
-		
-		if(cadastrado) {
-			request.setAttribute("successMessage", "Usuário cadastrado com sucesso!");
-		}else {
-			request.setAttribute("errorMessage", "Houve um erro durante o cadastro. Por favor, tente novamente.");
+		try {			
+			var nome = request.getParameter("nome");
+			var email = request.getParameter("email");
+			var senha = request.getParameter("senha");		
+			User user = new User(nome, email, senha);
+			
+			boolean cadastrado = userDao.create(user);
+			
+			if(cadastrado) {
+				request.setAttribute("successMessage", "Usuário cadastrado com sucesso!");
+			}else {
+				request.setAttribute("errorMessage", "Houve um erro durante o cadastro. Por favor, tente novamente.");
+			}
 		}
-				
+		catch(SQLException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+		}
+
 		return "/cadastro.jsp";
 	}
 }

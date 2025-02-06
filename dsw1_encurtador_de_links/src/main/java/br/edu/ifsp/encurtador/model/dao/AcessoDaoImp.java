@@ -17,7 +17,7 @@ public class AcessoDaoImp implements AcessoDao {
 	private static final String SELECT_ALL = "SELECT * FROM acessos WHERE url_id = ? ORDER BY id";
 
 	@Override
-	public boolean create(Acesso acesso) {
+	public boolean create(Acesso acesso) throws SQLException {
 		if(acesso != null) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();

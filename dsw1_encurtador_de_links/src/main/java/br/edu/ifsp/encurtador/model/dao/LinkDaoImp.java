@@ -2,6 +2,7 @@ package br.edu.ifsp.encurtador.model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
@@ -18,7 +19,7 @@ public class LinkDaoImp implements LinkDao{
 	private static final String DELETE = "DELETE FROM link WHERE id = ? AND email_criador = ?";
 
 	@Override
-	public boolean create(Link link) {
+	public boolean create(Link link) throws SQLException {
 		if(link != null) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
@@ -30,8 +31,12 @@ public class LinkDaoImp implements LinkDao{
 				preparedStatement.setBoolean(4, link.isPrivateLink());
 				rows = preparedStatement.executeUpdate();
 				
-			} catch (SQLException e) {
-				e.printStackTrace();
+			}
+			catch(SQLIntegrityConstraintViolationException e) {
+				throw new SQLException("Este identificador já está sendo usado por outro link.");
+			}
+			catch (SQLException e) {
+				throw new SQLException("Ops, houve um erro ao encurtar o link. Por favor, tente novamente.");
 			}
 			
 			return rows > 0;
