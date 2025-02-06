@@ -65,4 +65,8 @@ Para que o aplicativo funcione corretamente, siga os passos abaixo:
 
 ## Screenshots do Sistema em funcionamento 📷
 
+### Página Inicial
 
+Esta é a página inicial onde é possível escolher a opção de "Login", "Cadastrar Usuário" e "Encurtar Link" (sem estar logado).
+
+![Página Inicial](prints/print_inicial.png)
