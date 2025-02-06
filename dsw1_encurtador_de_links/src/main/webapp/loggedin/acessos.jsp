@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.collections4.CollectionUtils"%>
 <%@ page import="java.util.List" %>
 <%@ page import="br.edu.ifsp.encurtador.model.entity.Acesso" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,45 +16,44 @@
 </head>
 <body>
     <div class="container mt-5">
+    
+    	<%@ include file="/includes/messages.jsp" %>
+    
         <h1 class="text-center">Acessos</h1>
         <hr>
 
         <%
-            List<Acesso> acessos = (List<Acesso>) request.getAttribute("lista_acessos");
-            String message = (String) request.getAttribute("message");
-            String messageType = (String) request.getAttribute("messageType");
+            List<Acesso> accesses = (List<Acesso>) request.getAttribute("accesses");
         %>
-
-        <% if (message != null) { 
-        		String alertClass = "success".equals(messageType) ? "alert-success" : "alert-danger";
-        %>
-            <div class="d-flex justify-content-center mt-3">
-            <div class="alert <%= alertClass %> alert-dismissible fade show text-center" role="alert">
-                <%= message %>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </div>
-        <% } %>
 
         <table class="table table-bordered mt-4">
             <thead>
-                <tr>
+            	<tr>
+                    <th class="text-center">ID acesso</th>
                     <th class="text-center">IP</th>
+                    <th class="text-center">Data do acesso</th>
                 </tr>
             </thead>
             <tbody>
                 <%
-                    for (Acesso acesso : acessos) {
+                	if (CollectionUtils.isNotEmpty(accesses)) {                		
+	                    for (Acesso acesso : accesses) {
                 %>
-                    <tr>
-                        <td class="text-center"><%= acesso.getIpCliente()%></td>
-                    </tr>
-                <% } %>
+                
+                			<tr>
+		                        <td class="text-center"><%= acesso.getId() %></td>
+		                        <td class="text-center"><%= acesso.getIpCliente() %></td>
+		                        <td class="text-center"><%= acesso.getDataHoraAcesso() %></td>
+		                    </tr>
+                <% 
+	                    }
+                	} 
+                %>
             </tbody>
         </table>
 
         <div class="text-center mt-4">
-            <a href="logged.do?action=userPage" class="btn btn-danger">Voltar</a>
+            <a href="/encurtado.com/front.do?command=GetLinksCommand" class="btn btn-danger">Voltar</a>
         </div>
     </div>
 </body>

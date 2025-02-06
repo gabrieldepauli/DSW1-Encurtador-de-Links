@@ -1,10 +1,14 @@
 package br.edu.ifsp.encurtador.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import br.edu.ifsp.encurtador.model.dao.AcessoDao;
+import br.edu.ifsp.encurtador.model.dao.AcessoDaoFactory;
 import br.edu.ifsp.encurtador.model.dao.LinkDao;
 import br.edu.ifsp.encurtador.model.dao.LinkDaoFactory;
+import br.edu.ifsp.encurtador.model.entity.Acesso;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 import br.edu.ifsp.encurtador.model.enums.DaoImplementation;
@@ -19,10 +23,13 @@ public class RedirectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final String BASE_URL = "http://localhost:8080/encurtado.com/";
+	
 	private final LinkDao linkDao;
+	private final AcessoDao acessoDao;
 	
 	public RedirectController() {
 		this.linkDao = new LinkDaoFactory().getInstance(DaoImplementation.MYSQL);
+		this.acessoDao = new AcessoDaoFactory().getInstance(DaoImplementation.MYSQL);
 	}
 	
 	@Override
@@ -46,6 +53,14 @@ public class RedirectController extends HttpServlet {
 			else {	
 				resp.sendRedirect(link.getUrlOriginal());			
 			}
+			
+			String ipAddress = req.getRemoteAddr();
+
+			Acesso acesso = new Acesso();
+			acesso.setLinkId(link.getId());
+			acesso.setIpCliente(ipAddress);
+			acesso.setDataHoraAcesso(LocalDateTime.now());
+			acessoDao.create(acesso);
 		}
 		else {
 			req.getRequestDispatcher("/errors/404.jsp").forward(req, resp);

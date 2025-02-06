@@ -2,6 +2,7 @@ package br.edu.ifsp.encurtador.model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import br.edu.ifsp.encurtador.model.entity.Link;
 
 public class AcessoDaoImp implements AcessoDao {
 	
-	private static final String INSERT = "INSERT INTO acessos (url_id, ip_cliente) VALUES (?, ?)";
+	private static final String INSERT = "INSERT INTO acessos (url_id, ip_cliente, data_hora_acesso) VALUES (?, ?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM acessos WHERE id = ?";
 	private static final String SELECT_ALL = "SELECT * FROM acessos WHERE url_id = ? ORDER BY id";
 
@@ -24,6 +25,7 @@ public class AcessoDaoImp implements AcessoDao {
 				
 				preparedStatement.setInt(1, acesso.getLinkId());
 				preparedStatement.setString(2, acesso.getIpCliente());
+				preparedStatement.setTimestamp(3, Timestamp.valueOf(acesso.getDataHoraAcesso()));
 				rows = preparedStatement.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -49,6 +51,7 @@ public class AcessoDaoImp implements AcessoDao {
 					acesso = new Acesso();
 					acesso.setLinkId(result.getInt("id"));
 					acesso.setIpCliente(result.getString("ip_cliente"));
+					acesso.setDataHoraAcesso(result.getTimestamp("data_hora_acesso").toLocalDateTime());
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -72,6 +75,7 @@ public class AcessoDaoImp implements AcessoDao {
 					acesso.setId(result.getInt("id"));
 					acesso.setLinkId(result.getInt("url_id"));
 					acesso.setIpCliente(result.getString("ip_cliente"));
+					acesso.setDataHoraAcesso(result.getTimestamp("data_hora_acesso").toLocalDateTime());
 					acessos.add(acesso);
 				}
 			} catch (SQLException e) {
