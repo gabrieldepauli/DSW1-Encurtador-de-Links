@@ -126,6 +126,12 @@ Esta é a página onde é possível modificar o link.
 
 ![Modificar Link](prints/print_modificar.png)
 
+### - Acessos à um link
+
+Esta é a página onde é possível verificar os acessos que foram feitos à um link específico.
+
+![Acessos de um link](prints/print_acessos.png)
+
 ### - Acesso Bloqueado
 
 Página de erro gerada ao tentar acessar uma página pessoal de outro usuário (link criado com a opção de "Link Privado", bloqueando o acesso de demais pessoas).
