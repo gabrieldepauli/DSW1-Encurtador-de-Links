@@ -21,12 +21,13 @@ O projeto do encurtador de links foi criado pelos alunos do curso de Análise e 
 - **SQL:** Utilizado para armazenar os dados no Banco de Dados.
 - **Bootstrap:** Utilizado para estilizar as página JSP.
 - **CSS:** Utilizado para fazer a estilização das páginas utilizadas.
+- **Pool de conexões:** Utilizado para gerenciar as conexões do banco de dados. 
 - **Padrões de Projeto:** Foram utilizados os padrões FrontControler, Command, MVC, DAO, Factory (para DAO).
 - **Aplicativos:** MySQL Workbench e Eclipse.
 
 ## Sobre o projeto ℹ
 
-Este projeto é uma aplicação Web (desenvolvida no Eclipse) com linguagem JAVA que tem o objetivo de encurtar Links, permitindo o encurtamento aleatório (gerado pelo sistema) ou o personalizado, onde o usuário escolhe o que deseja colocar na personalização do link encurtado. Vale ressaltar que usuários logados terão acesso as duas opções de encurtamento, além de poder visualizar seus links e os acessos referentes a cada link (IP de quem acessou e a quantidade de acessos), já os usuários que não estiverem logados apenas poderão criar o link aleatório, sem que seja possível realizar o "rastreamento" dos acessos. Inclusive, no momento de criação dos links foi adicionado uma opção extra onde o usuário escolhe se o link poderá ser acessado por qualquer pessoa ou somente por ele mesmo, caso seja um link para algo pessoal onde seja necessário restringir o acesso.
+Este projeto é uma aplicação Web (desenvolvida no Eclipse) com linguagem JAVA que tem o objetivo de encurtar Links, permitindo o encurtamento aleatório (gerado pelo sistema) ou o personalizado, onde o usuário escolhe o que deseja colocar na personalização do link encurtado. Vale ressaltar que usuários logados terão acesso as duas opções de encurtamento, além de poder visualizar seus links e os acessos referentes a cada link (IP de quem acessou e a quantidade de acessos), já os usuários que não estiverem logados apenas poderão criar o link aleatório, sem que seja possível realizar o "rastreamento" dos acessos. Inclusive, no momento de criação dos links foi adicionado uma opção extra onde o usuário escolhe se o link poderá ser acessado por qualquer pessoa ou somente por ele mesmo, caso seja um link para algo pessoal onde seja necessário restringir o acesso. ** OBS: As senhas são armazenadas com Criptografia (Hashing - bcrypt), além de que são permitidos gerenciar 100 usuários simultâneos e até 1.000 requisições por minuto no sistema (utilizando Pool de conexões).**
 
 Para que o sistema funcione corretamente foram adicionadas algumas funções, irei especificar o que faz cada página abaixo:
 
@@ -65,8 +66,68 @@ Para que o aplicativo funcione corretamente, siga os passos abaixo:
 
 ## Screenshots do Sistema em funcionamento 📷
 
-### Página Inicial
+### - Página Inicial
 
 Esta é a página inicial onde é possível escolher a opção de "Login", "Cadastrar Usuário" e "Encurtar Link" (sem estar logado).
 
 ![Página Inicial](prints/print_inicial.png)
+
+### - Cadastrar usuário
+
+Esta é a página onde será possível fazer o cadastro dos usuários do sistema.
+
+![Cadastrar usuário](prints/print_cadastro.png)
+
+### - Sucesso ao cadastrar usuário
+
+Aqui exibe a mensagem de sucesso ao cadastrar um usuário.
+
+![Sucesso ao cadastrar usuário](prints/print_sucesso_usuario.png)
+
+### - Login
+
+Esta é a página onde será possível efetuar o Login do usuário.
+
+![Login](prints/print_login.png)
+
+### - Página de opções do usuário (Home)
+
+Página com as opções de ações do usuário.
+
+![Página de opções do usuário (Home)](prints/home.png)
+
+### - Encurtador
+
+Esta é a página onde se encurta o link (encurtamento gerado aleatoriamente pelo sistema).
+
+![Encurtador](prints/print_encurtador.png)
+
+### - Encurtado com sucesso
+
+Página após o link ser encurtado com sucesso.
+
+![Encurtado com sucesso](prints/print_encurtado_sucesso.png)
+
+### - Personalizar Links
+
+Esta é a página onde é possível a personalização do link para o encurtamento.
+
+![Personalizar Links](prints/print_personalizar.png)
+
+### - Lista de Links
+
+Página que exibe a lista de links do usuário e suas opções.
+
+![Lista de Links](prints/print_links.png)
+
+### - Modificar Link
+
+Esta é a página onde é possível modificar o link.
+
+![Modificar Link](prints/print_modificar.png)
+
+### - Acesso Bloqueado
+
+Página de erro gerada ao tentar acessar uma página pessoal de outro usuário (link criado com a opção de "Link Pessoal", bloqueando o acesso de demais pessoas).
+
+![Acesso Bloqueado](prints/print_acesso_bloqueado.png)
