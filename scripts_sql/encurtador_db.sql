@@ -20,8 +20,7 @@ CREATE TABLE acessos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     url_id INT NOT NULL,
     ip_cliente VARCHAR(100) NOT NULL,
+    data_hora_acesso DATETIME NOT NULL,
     FOREIGN KEY (url_id) REFERENCES link(id) ON DELETE CASCADE
 );
-
-SELECT * FROM usuario;
 
