@@ -74,7 +74,7 @@ Esta é a página inicial onde é possível escolher a opção de "Login", "Cada
 
 ### - Cadastrar usuário
 
-Esta é a página onde será possível fazer o cadastro dos usuários do sistema.
+Esta é a página onde será possível realizar os cadastros dos usuários do sistema.
 
 ![Cadastrar usuário](prints/print_cadastro.png)
 
@@ -90,7 +90,7 @@ Esta é a página onde será possível efetuar o Login do usuário.
 
 ![Login](prints/print_login.png)
 
-### - Página de opções do usuário (Home)
+### - Página de Opções do Usuário (Home)
 
 Página com as opções de ações do usuário.
 
@@ -102,7 +102,7 @@ Esta é a página onde se encurta o link (encurtamento gerado aleatoriamente pel
 
 ![Encurtador](prints/print_encurtador.png)
 
-### - Encurtado com sucesso
+### - Encurtado com Sucesso
 
 Página após o link ser encurtado com sucesso.
 
@@ -128,6 +128,6 @@ Esta é a página onde é possível modificar o link.
 
 ### - Acesso Bloqueado
 
-Página de erro gerada ao tentar acessar uma página pessoal de outro usuário (link criado com a opção de "Link Pessoal", bloqueando o acesso de demais pessoas).
+Página de erro gerada ao tentar acessar uma página pessoal de outro usuário (link criado com a opção de "Link Privado", bloqueando o acesso de demais pessoas).
 
 ![Acesso Bloqueado](prints/print_acesso_bloqueado.png)
