@@ -67,7 +67,7 @@ public class SaveLinkCommand implements Command {
 		
 		request.setAttribute("loggedin", getLoggedUser(request) != null);
 		
-		return "/encurtar-link.jsp";
+		return originPage;
 	}
 	
 	private User getLoggedUser(HttpServletRequest request) {
