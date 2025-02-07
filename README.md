@@ -60,8 +60,10 @@ Para que o aplicativo funcione corretamente, siga os passos abaixo:
 - Clone o repositório do Github no seu aplicativo "Eclipse" com Tomcat configurado como Server.
 - Certifique-se que o seu Java está na versão 18+ (versões 18 para cima).
 - Abra o MySql e crie o Banco de Dados com a base que está inclusa dentro da pasta “scripts_sql” no Github.
-- Configure a conexão com o seu Banco de Dados dentro da Classe "DatabaseConnection" que se localiza na pasta "Connection", alterando o URL, o nome de usuário (root) e a senha (root) já definidos dentro da classe para sua URL, nome de usuário e senha pessoais configurados em seu MySQL.
+- Configure a conexão com o seu Banco de Dados dentro da Classe "DatabaseConnection" que se localiza na pasta "Connection", alterando a URL, o nome de usuário (root) e a senha (root) já definidos dentro da classe para sua URL, nome de usuário e senha pessoais configurados em seu MySQL.
 - Configure o "context.xml", alterando o URL, o nome de usuário e a senha para os configurados em seu MySQL.
+- Altere o context root do projeto (Properties > Web Project Settings) para encurtado.com.
+- Reinicie o Eclipse.
 - Por último, coloque o sistema para rodar em seu navegador e teste as funcionalidades.
 
 ## Screenshots do Sistema em funcionamento 📷
