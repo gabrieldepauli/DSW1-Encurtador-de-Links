@@ -29,6 +29,8 @@ O projeto do encurtador de links foi criado pelos alunos do curso de Análise e 
 
 Este projeto é uma aplicação Web (desenvolvida no Eclipse) com linguagem JAVA que tem o objetivo de encurtar Links, permitindo o encurtamento aleatório (gerado pelo sistema) ou o personalizado, onde o usuário escolhe o que deseja colocar na personalização do link encurtado. Vale ressaltar que usuários logados terão acesso as duas opções de encurtamento, além de poder visualizar seus links e os acessos referentes a cada link (IP de quem acessou e a quantidade de acessos), já os usuários que não estiverem logados apenas poderão criar o link aleatório, sem que seja possível realizar o "rastreamento" dos acessos. Inclusive, no momento de criação dos links foi adicionado uma opção extra onde o usuário escolhe se o link poderá ser acessado por qualquer pessoa ou somente por ele mesmo, caso seja um link para algo pessoal onde seja necessário restringir o acesso. **OBS: As senhas são armazenadas com Criptografia (Hashing - bcrypt), além de que são permitidos gerenciar 100 usuários simultâneos e até 1.000 requisições por minuto no sistema (utilizando Pool de conexões).**
 
+Os Diagramas de Classe do projeto estão inclusos dentro da pasta "assets" e o Script do banco de dados utilizado está dentro da pasta "scripts_sql".
+
 Para que o sistema funcione corretamente foram adicionadas algumas funções, irei especificar o que faz cada página abaixo:
 
 - **Página Index:** Esta página possui uma mensagem perguntando se deseja entrar no sistema, um botão para encaminhar para pagina de login e um botão para encaminhar para página de cadastro de usuário.
