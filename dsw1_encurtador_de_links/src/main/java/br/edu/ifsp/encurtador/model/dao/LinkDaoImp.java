@@ -9,7 +9,7 @@ import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Link;
 import br.edu.ifsp.encurtador.model.entity.User;
 
-public class LinkDaoImp implements LinkDao{
+class LinkDaoImp implements LinkDao{
 	
 	private static final String INSERT = "INSERT INTO link (url_original, url_encurtada, email_criador, privado) VALUES (?, ?, ?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM link WHERE id = ?";

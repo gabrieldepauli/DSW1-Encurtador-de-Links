@@ -10,7 +10,7 @@ import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.Acesso;
 import br.edu.ifsp.encurtador.model.entity.Link;
 
-public class AcessoDaoImp implements AcessoDao {
+class AcessoDaoImp implements AcessoDao {
 	
 	private static final String INSERT = "INSERT INTO acessos (url_id, ip_cliente, data_hora_acesso) VALUES (?, ?, ?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM acessos WHERE id = ?";

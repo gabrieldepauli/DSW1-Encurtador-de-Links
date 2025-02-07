@@ -6,7 +6,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import br.edu.ifsp.encurtador.model.connection.DatabaseConnection;
 import br.edu.ifsp.encurtador.model.entity.User;
 
-public class UserDaoImp implements UserDao {
+class UserDaoImp implements UserDao {
 
 	private static final String INSERT = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM usuario WHERE email = ?";
