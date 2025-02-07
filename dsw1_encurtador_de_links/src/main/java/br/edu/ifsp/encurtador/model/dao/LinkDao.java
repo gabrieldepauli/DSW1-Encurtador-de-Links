@@ -18,5 +18,5 @@ public interface LinkDao extends BasicDao<Link> {
 	
 	boolean delete(Link link);
 	
-	boolean update(Link updatedLink);
+	boolean update(Link updatedLink) throws SQLException;
 }

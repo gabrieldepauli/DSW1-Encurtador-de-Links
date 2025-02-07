@@ -33,9 +33,11 @@ class LinkDaoImp implements LinkDao{
 				
 			}
 			catch(SQLIntegrityConstraintViolationException e) {
+				e.printStackTrace();
 				throw new SQLException("Este identificador já está sendo usado por outro link.");
 			}
 			catch (SQLException e) {
+				e.printStackTrace();
 				throw new SQLException("Ops, houve um erro ao encurtar o link. Por favor, tente novamente.");
 			}
 			
@@ -143,7 +145,7 @@ class LinkDaoImp implements LinkDao{
 	}
 
 	@Override
-	public boolean update(Link updatedLink) {
+	public boolean update(Link updatedLink) throws SQLException {
 		if(updatedLink != null && updatedLink.getId() > 0) {
 			int rows = -1;
 			try(var connection = DatabaseConnection.getConnection();
@@ -157,8 +159,13 @@ class LinkDaoImp implements LinkDao{
 				
 				rows = preparedStatement.executeUpdate();
 				
-			} catch (SQLException e) {
+			}
+			catch(SQLIntegrityConstraintViolationException e) {
+				throw new SQLException("Este identificador já está sendo usado por outro link.");
+			}
+			catch (SQLException e) {
 				e.printStackTrace();
+				throw new SQLException("Ops, houve um erro ao personalizar o link. Por favor, tente novamente.");
 			}
 			
 			return rows > 0;
