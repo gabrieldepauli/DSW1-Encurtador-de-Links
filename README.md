@@ -122,7 +122,7 @@ Esta é a página onde é possível a personalização do link para o encurtamen
 
 Página que exibe a lista de links do usuário e suas opções.
 
-![Lista de Links](prints/print_links.png)
+![Lista de Links](prints/print_lista_links.png)
 
 ### - Modificar Link
 
