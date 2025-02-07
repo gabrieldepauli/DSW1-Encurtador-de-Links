@@ -16,15 +16,14 @@
 </head>
 <body>
     <div class="container mt-5">
-    
-    	<%@ include file="/includes/messages.jsp" %>
-    
-        <h1 class="text-center">Acessos</h1>
-        <hr>
-
         <%
             List<Acesso> accesses = (List<Acesso>) request.getAttribute("accesses");
         %>
+    
+    	<%@ include file="/includes/messages.jsp" %>
+    
+        <h1 class="text-center">Acessos (<%= accesses != null ? accesses.size() : '0' %>) </h1>
+        <hr>
 
         <table class="table table-bordered mt-4">
             <thead>
@@ -36,7 +35,7 @@
             </thead>
             <tbody>
                 <%
-                	if (CollectionUtils.isNotEmpty(accesses)) {                		
+                	if (CollectionUtils.isNotEmpty(accesses)) {          		
 	                    for (Acesso acesso : accesses) {
                 %>
                 
